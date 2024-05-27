@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Theme variables */
+  :root {
+    /* Text colors */
+    --color-text-main: #fafafa;
+    --color-text-muted: #a1a1aa;
+
+    /* Background colors */
+    --color-background: #111113;
+    --color-elevation-1: #181819;
+    --color-elevation-2: #222225;
+    --color-elevation-3: #27272a;
+
+    /* Actions */
+    --color-primary-action: var(--color-text-main);
+    --color-on-primary-action: var(--color-background);
+    --color-secondary-action: var(--elevation-3);
+    --color-on-secondary-action: var(--color-text-main);
+    --color-warning: #c32626;
+    --color-on-warning: var(--color-text-main);
+
+    /* Border colors */
+    --color-border: var(--elevation-3);
+    --color-ring: #d4d4d8;
+  }
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/GeistVariable.ttf');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/JetBrainsMonoVariable.ttf');
+}
