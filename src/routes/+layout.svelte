@@ -1,11 +1,7 @@
 <script>
+  import PageHeader from '$lib/components/page-header.svelte';
   import '../app.css';
 </script>
 
+<PageHeader />
 <slot />
-
-<style>
-  :global(body) {
-    @apply font-mono bg-background text-text-main;
-  }
-</style>
