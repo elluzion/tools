@@ -14,6 +14,12 @@ npm create svelte@latest
 npm create svelte@latest my-app
 ```
 
+## Updating types
+
+```bash
+supabase gen types typescript --project-id 'PROJECTID' > .\src\lib\types\supabase.ts
+```
+
 ## Developing
 
 Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
