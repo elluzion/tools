@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -43,8 +44,12 @@
 }
 
 * {
-  @apply font-sans text-text-main border-border ring-ring;
+  @apply text-main-text border-border ring-ring;
 }
 body {
-  @apply bg-background w-screen h-screen;
+  @apply w-screen h-screen bg-background;
+}
+
+.content-wrapper {
+  @apply w-full p-4 mt-4 md:w-[736px] md:px-0;
 }

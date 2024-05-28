@@ -17,8 +17,8 @@ export default {
     },
     extend: {
       colors: {
-        'text-main': 'rgb(var(--color-text-main) / <alpha-value>)',
-        'text-muted': 'rgb(var(--color-text-muted) / <alpha-value>)',
+        'main-text': 'rgb(var(--color-text-main) / <alpha-value>)',
+        'muted-text': 'rgb(var(--color-text-muted) / <alpha-value>)',
         background: 'rgb(var(--color-background) / <alpha-value>)',
         'elevation-1': 'rgb(var(--color-elevation-1) / <alpha-value>)',
         'elevation-2': 'rgb(var(--color-elevation-2) / <alpha-value>)',
@@ -71,4 +71,5 @@ export default {
       },
     },
   },
+  plugins: [require('@tailwindcss/typography')],
 };
