@@ -3,6 +3,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/GeistVariable.ttf');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/JetBrainsMonoVariable.ttf');
+}
+
 @layer base {
   /* Theme variables */
   :root {
@@ -33,23 +43,18 @@
   }
 }
 
-@font-face {
-  font-family: 'Geist';
-  src: url('/fonts/GeistVariable.ttf');
-}
-
-@font-face {
-  font-family: 'JetBrains Mono';
-  src: url('/fonts/JetBrainsMonoVariable.ttf');
-}
-
 * {
   @apply text-main-text border-border ring-ring;
 }
+
+*::selection {
+  @apply bg-white bg-opacity-10;
+}
+
 body {
   @apply w-screen h-screen bg-background;
 }
 
 .content-wrapper {
-  @apply w-full p-4 mt-4 md:w-[736px] md:px-0;
+  @apply w-full p-4 mt-4 md:w-[736px] md:px-0 h-max;
 }
