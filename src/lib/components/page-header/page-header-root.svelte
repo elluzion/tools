@@ -10,7 +10,7 @@
 </script>
 
 <div class="fixed z-50 flex justify-center w-full h-16 p-4 md:px-0 bg-background">
-  <div class="w-full md:w-[736px] flex flex-row gap-4 items-center justify-between">
+  <div class="flex flex-row items-center justify-between gap-4 content-width">
     <Button
       on:click={() => goto('/')}
       size="icon"

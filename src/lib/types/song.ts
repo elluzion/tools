@@ -5,7 +5,6 @@ export type Song = {
   id: number;
   permalink: string;
   title: string;
-  description?: string;
   genre: string;
   releaseDate: Date;
   label?: string;

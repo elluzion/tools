@@ -52,9 +52,13 @@
 }
 
 body {
-  @apply w-screen h-screen bg-background;
+  @apply w-screen h-auto bg-background;
+}
+
+.content-width {
+  @apply !w-full lg:!w-[992px];
 }
 
 .content-wrapper {
-  @apply w-full p-4 mt-4 md:w-[736px] md:px-0 h-max;
+  @apply p-4 mt-4 content-width lg:px-0;
 }

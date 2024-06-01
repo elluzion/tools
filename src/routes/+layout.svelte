@@ -5,20 +5,18 @@
   import '../app.css';
 </script>
 
-<div>
-  <PageHeader />
-  {#if $navigating}
-    <div class="fixed z-50 flex items-center justify-center w-full h-full">
-      <Circle size="32" color="#fafafa" unit="px" duration="1s" />
-    </div>
-  {/if}
-  <div
-    style="opacity: {$navigating ? 0 : 1};
-      pointer-events: {$navigating ? 'none' : 'all'};
-      scale: {$navigating ? 0.99 : 1};
-      "
-    class="flex justify-center w-screen min-h-screen pt-16 overflow-x-hidden overflow-y-auto transition-all ease-in-out"
-  >
-    <slot />
+<PageHeader />
+{#if $navigating}
+  <div class="fixed z-50 flex items-center justify-center w-full h-full">
+    <Circle size="32" color="#fafafa" unit="px" duration="1s" />
   </div>
+{/if}
+<div
+  style="opacity: {$navigating ? 0 : 1};
+    pointer-events: {$navigating ? 'none' : 'all'};
+    scale: {$navigating ? 0.99 : 1};
+    "
+  class="flex justify-center w-screen pt-16 transition-all ease-in-out"
+>
+  <slot />
 </div>

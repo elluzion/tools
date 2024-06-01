@@ -1,11 +1,10 @@
 <script lang="ts">
-  import type { PlatformsType } from '$lib/utilities/platforms';
   import { onMount } from 'svelte';
 
   /**
-   * The platform to display its icon
+   * The platform to display its icon. Must be one of the platforms of {@link Platforms}
    */
-  export let platform: PlatformsType;
+  export let platform: string;
 
   /**
    * The size of the icon in pixels
@@ -36,6 +35,9 @@
         if (fill) {
           svgContent = svgContent.replaceAll(/fill=".*?"/g, `fill="${fill.trim().toLowerCase()}"`);
         }
+      })
+      .catch((error) => {
+        throw new Error(error);
       });
   });
 </script>
