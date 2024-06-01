@@ -16,7 +16,7 @@
     pointer-events: {$navigating ? 'none' : 'all'};
     scale: {$navigating ? 0.99 : 1};
     "
-  class="flex justify-center w-screen pt-16 transition-all ease-in-out"
+  class="flex justify-center w-screen pt-16 transition-[opacity,scale] ease-in-out"
 >
   <slot />
 </div>

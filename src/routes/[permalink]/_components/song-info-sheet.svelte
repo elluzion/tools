@@ -8,10 +8,16 @@
   export let song: Song;
 
   let downloadCount = song.downloadLinks.length;
+
+  const downloadFormats = () => {
+    const formats = song.downloadLinks.map((link) => link.format);
+    const uniqueFormats = new Set(formats);
+    return Array.from(uniqueFormats);
+  };
 </script>
 
 <InfoSheet>
-  <div slot="preview" class="flex items-center justify-center gap-3">
+  <div slot="preview" class="flex items-center justify-center gap-3" role="button">
     {#if song.releaseDate}
       <span>📅</span>
     {/if}
@@ -30,11 +36,13 @@
     {#if downloadCount > 0}
       <Badge variant="secondary" class="flex gap-2 truncate pointer-events-none">
         <span>📂</span>
-        {downloadCount}
+        <span class="font-mono text-sm text-muted-text">
+          {downloadFormats().join('/')}
+        </span>
       </Badge>
     {/if}
   </div>
-  <div slot="content" class="flex flex-col gap-3 *:font-mono *:text-muted-text">
+  <div class="flex flex-col gap-3 *:font-mono *:text-muted-text">
     {#if song.releaseDate}
       <span>📅 {Formatter.formatDate(song.releaseDate, false)}</span>
     {/if}

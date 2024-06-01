@@ -13,10 +13,10 @@
     alt="Art"
     class="absolute transition-opacity duration-500 rounded-md opacity-0 w-14 h-14 sm:w-16 sm:h-16 group-hover:opacity-100 blur-2xl -z-10 saturate-200"
   />
-  <div class="flex flex-col w-full gap-0.5 sm:gap-1">
+  <div class="flex flex-col w-full gap-1">
     <h5 class="text-lg font-semibold tracking-tight">{song.title}</h5>
     <div class="flex items-center w-full gap-2">
-      <p class="text-sm text-muted-text md:text-base text-ellipsis">
+      <p class="text-sm text-muted-text xs:text-base text-ellipsis">
         {Formatter.joinList(song.artists)}
       </p>
       <Badge

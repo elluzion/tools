@@ -72,6 +72,9 @@ export default {
       spacing: {
         contentDvh: 'calc(100dvh - 64px)',
       },
+      screens: {
+        xs: '400px',
+      },
     },
   },
   plugins: [require('@tailwindcss/typography')],
