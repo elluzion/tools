@@ -5,6 +5,7 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
   import Button from '$lib/components/ui/button/button.svelte';
+  import MaterialSymbol from '../material-symbol.svelte';
   import { PageHeaderTitle } from './store';
   const homeButtonIconUrl = '/icons/elluzion_small_icon.svg';
 </script>
@@ -19,7 +20,7 @@
     ></Button>
     <span class="font-mono text-sm font-semibold truncate grow">{$PageHeaderTitle}</span>
     <Button size="icon" variant="outline"
-      ><span class="material-symbols-outlined"> home_repair_service </span></Button
+      ><MaterialSymbol>home_repair_service</MaterialSymbol></Button
     >
   </div>
 </div>

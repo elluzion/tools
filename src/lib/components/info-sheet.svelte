@@ -1,6 +1,7 @@
 <script lang="ts">
   import { Button } from '$lib/components/ui/button';
   import { onMount } from 'svelte';
+  import MaterialSymbol from './material-symbol.svelte';
 
   let isExpanded = false;
   let previewContent: HTMLDivElement;
@@ -102,7 +103,7 @@
         class="rounded-full bg-elevation-2 {isExpanded &&
           'rotate-180'} transition-transform duration-300"
       >
-        <span class="material-symbols-outlined"> keyboard_arrow_up </span>
+        <MaterialSymbol>keyboard_arrow_up</MaterialSymbol>
       </Button>
     </div>
   </div>
