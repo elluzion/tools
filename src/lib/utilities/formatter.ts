@@ -32,8 +32,10 @@ export default class Formatter {
   //#endregion
 
   //#region Lists
-  static joinList(list: string[]): string {
-    if (list.length === 2) {
+  static joinList(list: string[], nice: boolean = false): string {
+    if (!nice) {
+      return list.join(', ');
+    } else if (list.length === 2) {
       return list.join(' and ');
     } else if (list.length > 2) {
       return list.slice(0, -1).join(', ') + ' & ' + list[list.length - 1];

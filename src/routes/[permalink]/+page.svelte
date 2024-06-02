@@ -76,7 +76,7 @@
           {song.title}
         </h3>
         <p class="w-full font-medium text-center truncate opacity-70">
-          {Formatter.joinList(song.artists)}
+          {Formatter.joinList(song.artists, true)}
         </p>
       </div>
     </div>
