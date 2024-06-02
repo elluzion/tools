@@ -25,6 +25,7 @@
     <Button
       size="icon"
       variant="outline"
+      on:click={() => goto('/tools')}
       class="{!isHome ? 'opacity-0 pointer-events-none -translate-y-4 ' : ''}transition-all"
       ><MaterialSymbol>home_repair_service</MaterialSymbol></Button
     >
