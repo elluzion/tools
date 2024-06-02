@@ -4,10 +4,13 @@
 -->
 <script lang="ts">
   import { goto } from '$app/navigation';
+  import { page } from '$app/stores';
   import Button from '$lib/components/ui/button/button.svelte';
   import MaterialSymbol from '../material-symbol.svelte';
   import { PageHeaderTitle } from './store';
   const homeButtonIconUrl = '/icons/elluzion_small_icon.svg';
+
+  $: isHome = $page.url.pathname === '/';
 </script>
 
 <div class="fixed z-50 flex justify-center w-full h-16 p-4 lg:px-0 bg-background">
@@ -19,7 +22,10 @@
       variant="ghost"
     ></Button>
     <span class="font-mono text-sm font-semibold truncate grow">{$PageHeaderTitle}</span>
-    <Button size="icon" variant="outline"
+    <Button
+      size="icon"
+      variant="outline"
+      class="{!isHome ? 'opacity-0 pointer-events-none -translate-y-4 ' : ''}transition-all"
       ><MaterialSymbol>home_repair_service</MaterialSymbol></Button
     >
   </div>

@@ -32,7 +32,7 @@
 
   function getScrollBackgroundOpacity() {
     // The max amount that the background can be dimmed
-    const minOpacity = 0.3;
+    const minOpacity = 0.5;
 
     const foregroundOpacity = 1 - getScrollProgress() * (1 - minOpacity);
     return foregroundOpacity;
@@ -81,7 +81,7 @@
       </div>
     </div>
     <!-- BUTTONS -->
-    <div class="flex flex-col items-stretch justify-center gap-2 p-4 pb-0">
+    <div class="flex flex-col items-stretch justify-center gap-2 px-4">
       {#each song.streamLinks as link, index}
         <Button
           class="flex gap-2 truncate shadow-xl h-14"
