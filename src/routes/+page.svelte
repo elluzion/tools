@@ -15,10 +15,9 @@
 
 <div class="flex flex-col gap-3 content-wrapper">
   <!-- Header -->
-  <div class="flex flex-col">
-    <h1 class="text-3xl font-bold tracking-tight">Music</h1>
+  <div class="flex flex-col gap-2">
     <div class="flex items-end justify-between w-full">
-      <span class="font-mono text-muted-text">Latest</span>
+      <h1 class="text-3xl font-bold tracking-tight">Music</h1>
       <div class="flex gap-4 p-3 border rounded-xl">
         {#each socialLinks as platform}
           <PlatformIcon
@@ -30,6 +29,7 @@
         {/each}
       </div>
     </div>
+    <span class="font-mono text-muted-text">Latest</span>
   </div>
 
   <!-- Latest release -->
