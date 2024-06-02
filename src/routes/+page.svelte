@@ -1,10 +1,11 @@
 <script lang="ts">
   import { setPageHeaderTitle } from '$lib/components/page-header';
   import PlatformIcon from '$lib/components/platform-icon.svelte';
+  import type { PageData } from './$types';
   import LatestReleaseCard from './_components/latest-release-card.svelte';
   import ReleaseItem from './_components/release-item.svelte';
 
-  export let data;
+  export let data: PageData;
   if (!data.songs) throw new Error('No songs found');
   const songs = data.songs!;
   const socialLinks = data.socialLinks!;

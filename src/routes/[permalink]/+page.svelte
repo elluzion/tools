@@ -7,9 +7,10 @@
   import Formatter from '$lib/utilities/formatter';
   import { resolvePlatform, type Platform } from '$lib/utilities/platforms.js';
   import { onMount } from 'svelte';
+  import type { PageData } from './$types';
   import SongInfoSheet from './_components/song-info-sheet.svelte';
 
-  export let data;
+  export let data: PageData;
   if (!data.song) goto('/');
 
   let foreground: HTMLDivElement;
@@ -33,7 +34,6 @@
   function getScrollBackgroundOpacity() {
     // The max amount that the background can be dimmed
     const minOpacity = 0.5;
-
     const foregroundOpacity = 1 - getScrollProgress() * (1 - minOpacity);
     return foregroundOpacity;
   }
