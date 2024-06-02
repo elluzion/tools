@@ -3,6 +3,7 @@
   import { onMount } from 'svelte';
   import MaterialSymbol from './material-symbol.svelte';
 
+  let isMounted = false;
   let isExpanded = false;
   let previewContent: HTMLDivElement;
   let content: HTMLDivElement;
@@ -57,12 +58,15 @@
 
     // Update content height on resize
     window.onresize = updateContentHeight;
+
+    // If component has been mounted, fade the container in
+    isMounted = true;
   });
   //#endregion
 </script>
 
 <!-- Info Sheet Container -->
-<div id="container">
+<div id="container" class="{isMounted ? 'opacity-100' : 'opacity-0'} delay-200 transition-opacity">
   <!-- Info Sheet -->
   <div
     id="infoSheet"
