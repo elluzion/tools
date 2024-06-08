@@ -1,10 +1,6 @@
-import { getSongs } from '$lib/server/songs';
-import { supabase } from '$lib/server/supabase';
-
-export const load = async () => {
-  const songs = await getSongs();
-  /** SOCIAL LINKS */
-  const { data: socialLinks } = await supabase.from('social_links').select('*');
+export const load = async ({ locals: { db } }) => {
+  const songs = await db.songs.getSongs();
+  const socialLinks = await db.socials.getSocialLinks();
   return {
     songs,
     socialLinks,

@@ -18,7 +18,7 @@
   <!-- Header -->
   <div class="flex flex-col gap-2">
     <div class="flex items-end justify-between w-full">
-      <h1 class="text-3xl font-bold tracking-tight">Music</h1>
+      <h1>Music</h1>
       <div class="flex gap-4 p-3 border rounded-xl">
         {#each socialLinks as platform}
           <PlatformIcon

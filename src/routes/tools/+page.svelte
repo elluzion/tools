@@ -20,7 +20,7 @@
 </script>
 
 <div class="flex flex-col gap-2 content-wrapper">
-  <h1 class="text-3xl font-bold tracking-tight">Tools</h1>
+  <h1>Tools</h1>
   <div>
     {#each tools as tool}
       <a href="/tools/{tool.path}">
