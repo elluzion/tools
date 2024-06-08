@@ -15,8 +15,8 @@
     <p class="font-medium truncate text-muted-text">{Formatter.joinList(song.artists)}</p>
   </div>
   <div>
-    <Badge class="truncate pointer-events-none">{song.genre}</Badge>
-    <Badge variant="secondary" class="truncate pointer-events-none">
+    <Badge variant="secondary" class="truncate pointer-events-none">{song.genre}</Badge>
+    <Badge variant="outline" class="truncate pointer-events-none">
       {Formatter.formatDate(song.releaseDate, false)}
     </Badge>
   </div>

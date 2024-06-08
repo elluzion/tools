@@ -7,7 +7,7 @@
 
 <Badge
   variant="secondary"
-  class="gap-2 cursor-pointer pr-1.5 font-sans text-main-text"
+  class="gap-2 cursor-pointer pr-1.5 text-main-text"
   href={downloadLink.url}
   target="_blank"
   >{downloadLink.edit}

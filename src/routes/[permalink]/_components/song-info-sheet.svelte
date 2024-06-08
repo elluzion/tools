@@ -9,7 +9,7 @@
 
   let downloadCount = song.downloadLinks.length;
 
-  const downloadFormats = () => {
+  $: downloadFormats = () => {
     const formats = song.downloadLinks.map((link) => link.format);
     const uniqueFormats = new Set(formats);
     return Array.from(uniqueFormats);
@@ -36,7 +36,7 @@
     {#if downloadCount > 0}
       <Badge variant="secondary" class="flex gap-2 truncate pointer-events-none">
         <span>📂</span>
-        <span class="font-mono text-sm text-muted-text">
+        <span class="text-sm text-muted-text">
           {downloadFormats().join('/')}
         </span>
       </Badge>
@@ -59,7 +59,7 @@
       <span>💿 {song.label}</span>
     {/if}
     {#if downloadCount > 0}
-      <span>📂 {downloadCount} {downloadCount === 1 ? 'download' : 'downloads'} </span>
+      <span>📂 {Formatter.joinList(downloadFormats(), true)} </span>
       <div class="flex flex-wrap gap-2 pt-1">
         {#each song.downloadLinks as downloadLink}
           <DownloadBadge {downloadLink} />
