@@ -1,5 +1,5 @@
 /**
-@typedef {import("./types.ts").WorkerUpdate} WorkerReturnMessage
+ @typedef {import("./types.ts").WorkerUpdate} WorkerReturnMessage
  */
 
 importScripts('/scripts/essentia-wasm.es.js');
@@ -105,6 +105,12 @@ addEventListener('message', (msg) => {
   });
 });
 
+/**
+ * Returns the given BPM value doubled if it is less than 89, otherwise returns the original value.
+ *
+ * @param {number} bpm - The BPM value to check and potentially double.
+ * @return {number} The BPM value doubled if less than 89, otherwise the original value.
+ */
 function doubleIfLow(bpm) {
   return bpm < 89 ? bpm * 2 : bpm;
 }
