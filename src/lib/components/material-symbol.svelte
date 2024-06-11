@@ -3,7 +3,3 @@
 </script>
 
 <span {...$$restProps} class={`${$$restProps.class} material-symbols-outlined`}> <slot /> </span>
-
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0');
-</style>
