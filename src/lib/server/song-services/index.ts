@@ -231,7 +231,7 @@ export default class SongServices {
 
   private artistStringToList(artistString: string) {
     // artists separated by comma or &
-    return artistString.split(/(?:,|&)+/).map((x) => x.trim());
+    return artistString.split(/(?:,|&|x)+/).map((x) => x.trim());
   }
 
   //#endregion
