@@ -45,6 +45,25 @@ export default class Formatter {
   }
   //#endregion
 
+  //#region String modification
+  static pascalCase(input: string) {
+    return input[0].toUpperCase() + input.slice(1);
+  }
+
+  static toUrlSafeString(input: string) {
+    input = input
+      .toLowerCase()
+      .normalize('NFD') // normalize string
+      .replace(/[\u0300-\u036f]/g, '') // remove accents
+      .replace(/[^a-zA-Z0-9 ]/g, ''); // remove all characters except letters, numbers and whitespace
+    return this.cleanWhitespace(input, '-');
+  }
+
+  static cleanWhitespace(input: string, filler?: string) {
+    return input.replace(/\s+/g, filler || ' ').trim();
+  }
+  //#endregion
+
   //#region Private
   private static getOrdinalSuffix(day: number): string {
     if (day >= 11 && day <= 13) {
