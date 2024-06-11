@@ -23,7 +23,7 @@
   });
 </script>
 
-<PageHeader />
+<PageHeader isLoggedIn={!!session} />
 {#if isNav}
   <div class="fixed z-50 flex items-center justify-center w-full h-full">
     <Circle size="32" color="#fafafa" unit="px" duration="1s" />
