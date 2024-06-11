@@ -4,6 +4,7 @@
   import { navigating } from '$app/stores';
   import { PageHeader } from '$lib/components/page-header';
   import { onMount } from 'svelte';
+  import { Toaster } from 'svelte-french-toast';
   import { Circle } from 'svelte-loading-spinners';
   import '../app.css';
 
@@ -23,6 +24,14 @@
   });
 </script>
 
+<Toaster
+  position="bottom-center"
+  toastOptions={{
+    duration: 3000,
+    className:
+      '!font-mono !font-medium [&>.message]:!text-muted-text !px-6 !py-4 !bg-elevation-2 !rounded-full !flex !gap-2 !shadow-2xl',
+  }}
+/>
 <PageHeader isLoggedIn={!!session} />
 {#if isNav}
   <div class="fixed z-50 flex items-center justify-center w-full h-full">
