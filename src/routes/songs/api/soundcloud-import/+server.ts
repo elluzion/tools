@@ -14,7 +14,7 @@ export const POST: RequestHandler = async ({ request }) => {
 
     return new Response(JSON.stringify(data), { status: 200 });
   } catch (e) {
-    return new Response(JSON.stringify({}), {
+    return new Response(undefined, {
       status: 500,
       statusText: 'Failed to import from soundcloud',
     });
