@@ -6,18 +6,17 @@ export const POST: RequestHandler = async ({ request }) => {
 
   try {
     if (!url) {
-      throw new Error();
+      throw new Error('No URL provided');
     }
 
     const songServices = new SongServices();
     const data = await songServices.importFromSoundcloud(url);
 
-    if (data) {
-      return new Response(JSON.stringify(data), { status: 200 });
-    } else {
-      throw new Error();
-    }
+    return new Response(JSON.stringify(data), { status: 200 });
   } catch (e) {
-    return new Response('Failed importing song from Soundcloud', { status: 500 });
+    return new Response(JSON.stringify({}), {
+      status: 500,
+      statusText: 'Failed to import from soundcloud',
+    });
   }
 };
