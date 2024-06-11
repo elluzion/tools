@@ -1,7 +1,7 @@
 import type { Database } from '$lib/types/supabase';
 import type { SupabaseClient } from '@supabase/supabase-js';
-import Socials from './db/socials';
-import Songs from './db/songs';
+import Socials from './socials';
+import Songs from './songs';
 
 export default class Db {
   public songs: Songs;
