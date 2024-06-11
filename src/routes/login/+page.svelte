@@ -1,9 +1,12 @@
 <script lang="ts">
+  import { setPageHeaderTitle } from '$lib/components/page-header';
   import Button from '$lib/components/ui/button/button.svelte';
   import type { PageData } from './$types';
 
   export let data: PageData;
   let { supabase, session } = data;
+
+  setPageHeaderTitle('Login');
 
   async function login() {
     const { error } = await supabase.auth.signInWithOAuth({
