@@ -47,7 +47,7 @@ export default class Formatter {
 
   //#region String modification
   static pascalCase(input: string) {
-    return input[0].toUpperCase() + input.slice(1);
+    return input[0].toUpperCase() + input.slice(1).toLowerCase();
   }
 
   static toUrlSafeString(input: string) {

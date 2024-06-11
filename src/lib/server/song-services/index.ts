@@ -99,6 +99,7 @@ export default class SongServices {
         label: labelName,
         artUrl: track.artwork_url,
         genre: track.genre,
+        type: parsedQuery.type,
       };
 
       return data;
@@ -211,7 +212,7 @@ export default class SongServices {
     const queryTitle = queryArtists ? queryParts.slice(1).join(' ') : query;
 
     const title = Formatter.cleanWhitespace(queryTitle);
-    const artists: string[] = [];
+    let artists: string[] = [];
 
     // MAIN ARTISTS
     if (queryArtists) {
@@ -223,15 +224,29 @@ export default class SongServices {
       artists.push(...this.artistStringToList(queryFeatureArtists));
     }
 
+    // ARTISTS FORMATTING (CAMEL CASE)
+    artists = artists.map((artist) => {
+      return artist
+        .split(' ')
+        .map((x) => Formatter.pascalCase(x))
+        .join(' ');
+    });
+
+    // RELEASE TYPE
+    const type = /remix|edit|vip|flip|bootleg/.test(queryTitle.toLowerCase())
+      ? 'Remix'
+      : 'Original';
+
     return {
       title: title,
       artists: artists,
+      type: type,
     };
   }
 
   private artistStringToList(artistString: string) {
     // artists separated by comma or &
-    return artistString.split(/(?:,|&|x)+/).map((x) => x.trim());
+    return artistString.split(/\s(?:,|&|x)\s+/).map((x) => x.trim());
   }
 
   //#endregion

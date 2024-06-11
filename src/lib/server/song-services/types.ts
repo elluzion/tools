@@ -4,6 +4,7 @@ export type SoundcloudImportItem = {
   permalink: string;
   releaseDate: Date;
   label: string;
+  type: string;
   artUrl?: string;
   genre?: string;
 };
