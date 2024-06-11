@@ -78,34 +78,37 @@ export default class SongServices {
     };
   }
 
+  /**
+   * Imports a song from Soundcloud based on the provided URL.
+   *
+   * @param {string} url - The URL of the Soundcloud track.
+   * @return {Promise<SoundcloudImportItem>} The parsed data of the imported song.
+   * @throws {Error}
+   */
   async importFromSoundcloud(url: string) {
     if (!url.startsWith('https://') || !url.includes('soundcloud.com')) {
       throw Error('The provided URL has to be a Soundcloud link');
     }
 
-    try {
-      const track = await this.soundcloudApi.tracks.getV2(url);
+    const track = await this.soundcloudApi.tracks.getV2(url);
 
-      const parsedQuery = this.parseQuery(track.title);
-      const permalink = Formatter.toUrlSafeString(parsedQuery.title);
-      const releaseDate = new Date(track.release_date || track.display_date);
-      const labelName = track.label_name || track.user.username;
+    const parsedQuery = this.parseQuery(track.title);
+    const permalink = Formatter.toUrlSafeString(parsedQuery.title);
+    const releaseDate = new Date(track.release_date || track.display_date);
+    const labelName = track.label_name || track.user.username;
 
-      const data: SoundcloudImportItem = {
-        artists: parsedQuery.artists,
-        title: parsedQuery.title,
-        permalink: permalink,
-        releaseDate: releaseDate,
-        label: labelName,
-        artUrl: track.artwork_url,
-        genre: track.genre,
-        type: parsedQuery.type,
-      };
+    const data: SoundcloudImportItem = {
+      artists: parsedQuery.artists,
+      title: parsedQuery.title,
+      permalink: permalink,
+      releaseDate: releaseDate,
+      label: labelName,
+      artUrl: track.artwork_url,
+      genre: track.genre,
+      type: parsedQuery.type,
+    };
 
-      return data;
-    } catch (e) {
-      console.log(e);
-    }
+    return data;
   }
   //#endregion
 
@@ -246,7 +249,7 @@ export default class SongServices {
 
   private artistStringToList(artistString: string) {
     // artists separated by comma or &
-    return artistString.split(/\s(?:,|&|x)\s+/).map((x) => x.trim());
+    return artistString.split(/(?:,|\s&|\sx)\s+/).map((x) => x.trim());
   }
 
   //#endregion
