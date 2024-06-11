@@ -18,4 +18,5 @@ export type FormPageStore = {
     total: number;
   };
   form: SuperForm<Song, unknown>;
+  showSoundcloudImport: boolean;
 };
