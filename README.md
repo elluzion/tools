@@ -20,6 +20,11 @@ bun dev --host
 bun dev --open
 ```
 
+INFO FOR TESTING ON THE NETWORK:
+The supabase auth uses WebCrypto, which is not available on insecure origins.
+To bypass this problem, enable chrome://flags flag 'Insecure origins treated as secure',
+and add the URL to the test environment.
+
 ## Building
 
 To create a production version of your app:
