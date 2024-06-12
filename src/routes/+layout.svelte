@@ -29,7 +29,7 @@
   toastOptions={{
     duration: 3000,
     className:
-      '!font-mono !font-medium [&>.message]:!text-muted-text !px-6 !py-4 !bg-elevation-2 !rounded-full !flex !gap-2 !shadow-2xl',
+      '!font-mono !font-medium [&>.message]:!text-muted-text !px-6 !py-4 !mb-2 !bg-elevation-2 !rounded-full !flex !gap-2 !shadow-2xl',
   }}
 />
 <PageHeader isLoggedIn={!!session} />
