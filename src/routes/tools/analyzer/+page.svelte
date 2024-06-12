@@ -14,7 +14,6 @@
   let workerProgress = 0;
 
   function onFileSubmitted({ detail: submittedFile }: CustomEvent<File>) {
-    // TODO: analyze file
     file = submittedFile;
 
     // reset
