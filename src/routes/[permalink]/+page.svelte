@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { goto } from '$app/navigation';
   import { setPageHeaderTitle } from '$lib/components/page-header';
   import PlatformIcon from '$lib/components/platform-icon.svelte';
   import Button from '$lib/components/ui/button/button.svelte';
@@ -11,12 +10,11 @@
   import SongInfoSheet from './_components/song-info-sheet.svelte';
 
   export let data: PageData;
-  if (!data.song) goto('/');
 
   let foreground: HTMLDivElement;
   let backgroundOpacity: number = 1;
 
-  const song = data.song!;
+  const song = data.song;
   const platforms = song.streamLinks.map((x) => resolvePlatform(x));
 
   setPageHeaderTitle(song.title);
