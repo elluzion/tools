@@ -52,7 +52,7 @@
   <span>{subTitle}</span>
 </div>
 
-<style>
+<style lang="postcss">
   #container {
     @apply flex flex-col gap-3 p-4 rounded-lg bg-elevation-1 text-main-text transition-[opacity,transform] ease-out opacity-0 translate-y-4;
   }

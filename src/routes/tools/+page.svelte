@@ -19,6 +19,10 @@
   setPageHeaderTitle('Tools');
 </script>
 
+<svelte:head>
+  <title>Tools | Elluzion</title>
+</svelte:head>
+
 <div class="flex flex-col gap-2 content-wrapper">
   <h1>Tools</h1>
   <div>

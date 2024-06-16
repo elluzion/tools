@@ -56,6 +56,10 @@
   setPageHeaderTitle('Audio analyzer');
 </script>
 
+<svelte:head>
+  <title>Analyzer | Elluzion</title>
+</svelte:head>
+
 <div class="content-wrapper">
   <div class="flex flex-col gap-6 grow">
     <FileUploadInput
