@@ -1,4 +1,4 @@
-export const Platforms: Platform[] = [
+export const MusicPlatforms: Platform[] = [
   {
     id: 'amazon-music',
     name: 'Amazon Music',
@@ -19,20 +19,6 @@ export const Platforms: Platform[] = [
     color: '#A238FF',
     brightColor: false,
     linkIncludes: 'deezer',
-  },
-  {
-    id: 'discord',
-    name: 'Discord',
-    color: '#5865F2',
-    brightColor: false,
-    linkIncludes: 'discord',
-  },
-  {
-    id: 'instagram',
-    name: 'Instagram',
-    color: '#E1306C',
-    brightColor: false,
-    linkIncludes: 'instagram',
   },
   {
     id: 'pandora',
@@ -57,7 +43,7 @@ export const Platforms: Platform[] = [
   },
   {
     id: 'tidal',
-    name: 'TIDAL',
+    name: 'Tidal',
     color: '#ffffff',
     brightColor: true,
     linkIncludes: 'tidal',
@@ -69,7 +55,25 @@ export const Platforms: Platform[] = [
     brightColor: false,
     linkIncludes: 'youtu',
   },
-];
+] as const;
+
+export const Platforms: Platform[] = [
+  {
+    id: 'discord',
+    name: 'Discord',
+    color: '#5865F2',
+    brightColor: false,
+    linkIncludes: 'discord',
+  },
+  {
+    id: 'instagram',
+    name: 'Instagram',
+    color: '#E1306C',
+    brightColor: false,
+    linkIncludes: 'instagram',
+  },
+  ...MusicPlatforms,
+] as const;
 
 /**
  * Resolves a platform based on the given query.
@@ -79,10 +83,18 @@ export const Platforms: Platform[] = [
  * @throws {Error} If no platform is found.
  */
 export function resolvePlatform(query: string): Platform {
+  const fallback: Platform = {
+    id: 'default',
+    name: 'Default',
+    color: '#ffffff',
+    brightColor: true,
+    linkIncludes: '',
+  };
+
   if (query.startsWith('https://')) {
-    return Platforms.find((x) => query.includes(x.linkIncludes))!;
+    return Platforms.find((x) => query.includes(x.linkIncludes)) || fallback;
   } else {
-    return Platforms.find((p) => p.id === query)!;
+    return Platforms.find((p) => p.id === query) || fallback;
   }
 }
 

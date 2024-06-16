@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { browser } from '$app/environment';
   import { onMount } from 'svelte';
 
   /**
@@ -23,22 +24,34 @@
 
   $: svgContent = '';
   $: platformIconPath = `/icons/platforms/${platform}.svg`;
+  $: {
+    platform;
+    getPlatformIconPath();
+  }
 
+  function getPlatformIconPath() {
+    if (browser) {
+      fetch(platformIconPath)
+        .then((response) => response.text())
+        .then((data) => {
+          svgContent = data;
+          svgContent = svgContent
+            .replace(/width=".*?"/g, `width="${size}"`)
+            .replace(/height=".*?"/g, `height="${size}"`);
+          if (fill) {
+            svgContent = svgContent.replaceAll(
+              /fill=".*?"/g,
+              `fill="${fill.trim().toLowerCase()}"`,
+            );
+          }
+        })
+        .catch((error) => {
+          throw new Error(error);
+        });
+    }
+  }
   onMount(() => {
-    fetch(platformIconPath)
-      .then((response) => response.text())
-      .then((data) => {
-        svgContent = data;
-        svgContent = svgContent
-          .replace(/width=".*?"/g, `width="${size}"`)
-          .replace(/height=".*?"/g, `height="${size}"`);
-        if (fill) {
-          svgContent = svgContent.replaceAll(/fill=".*?"/g, `fill="${fill.trim().toLowerCase()}"`);
-        }
-      })
-      .catch((error) => {
-        throw new Error(error);
-      });
+    getPlatformIconPath();
   });
 </script>
 
