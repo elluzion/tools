@@ -41,7 +41,7 @@
   {...$$restProps}
 />
 
-<style scoped>
+<style lang="postcss" scoped>
   input[type='date']::-webkit-calendar-picker-indicator {
     display: none;
   }
