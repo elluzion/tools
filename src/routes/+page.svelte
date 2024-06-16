@@ -14,6 +14,10 @@
   setPageHeaderTitle('Home');
 </script>
 
+<svelte:head>
+  <title>Elluzion</title>
+</svelte:head>
+
 <div class="flex flex-col gap-3 content-wrapper">
   <!-- Header -->
   <div class="flex flex-col gap-2">

@@ -26,6 +26,10 @@
   }
 </script>
 
+<svelte:head>
+  <title>Log in | Elluzion</title>
+</svelte:head>
+
 <div class="flex flex-col gap-2 content-wrapper">
   <h1>Login</h1>
 
