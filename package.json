@@ -36,6 +36,7 @@
   "type": "module",
   "dependencies": {
     "@googleapis/customsearch": "^3.0.0",
+    "@googleapis/youtube": "^18.0.0",
     "@internationalized/date": "^3.5.4",
     "@spotify/web-api-ts-sdk": "^1.2.0",
     "@supabase/ssr": "^0.3.0",
@@ -43,6 +44,7 @@
     "bits-ui": "^0.21.10",
     "clsx": "^2.1.1",
     "formsnap": "^1.0.0",
+    "http-status-codes": "^2.3.0",
     "lucide-svelte": "^0.394.0",
     "soundcloud.ts": "0.5.2",
     "svelte-french-toast": "^1.2.0",
