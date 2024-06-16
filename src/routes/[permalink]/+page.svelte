@@ -1,15 +1,20 @@
 <script lang="ts">
+  import { goto } from '$app/navigation';
+  import MaterialSymbol from '$lib/components/material-symbol.svelte';
   import { setPageHeaderTitle } from '$lib/components/page-header';
   import PlatformIcon from '$lib/components/platform-icon.svelte';
+  import SpacerHandle from '$lib/components/spacer-handle.svelte';
   import Button from '$lib/components/ui/button/button.svelte';
+  import { resolvePlatform, type Platform } from '$lib/shared/platforms.js';
   import { clampNumber } from '$lib/utilities/clamp';
   import Formatter from '$lib/utilities/formatter';
-  import { resolvePlatform, type Platform } from '$lib/utilities/platforms.js';
   import { onMount } from 'svelte';
   import type { PageData } from './$types';
   import SongInfoSheet from './_components/song-info-sheet.svelte';
 
   export let data: PageData;
+
+  $: ({ session } = data);
 
   let foreground: HTMLDivElement;
   let backgroundOpacity: number = 1;
@@ -42,6 +47,10 @@
     });
   });
 </script>
+
+<svelte:head>
+  <title>{data.song.title} | Elluzion</title>
+</svelte:head>
 
 <div class="!p-0 !mt-0 content-wrapper rounded-t-3xl overflow-hidden">
   <!-- Blurry background -->
@@ -92,6 +101,14 @@
           {platforms[index].name}
         </Button>
       {/each}
+      {#if session}
+        <SpacerHandle light={true} />
+        <Button
+          class="flex gap-2 truncate shadow-xl h-14"
+          on:click={() => goto(`/songs/${song.permalink}`)}
+          ><MaterialSymbol class="text-background">edit</MaterialSymbol> Edit</Button
+        >
+      {/if}
     </div>
   </div>
 
