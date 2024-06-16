@@ -22,11 +22,6 @@ export type Song = {
 };
 
 /**
- * Song stream link
- */
-export type StreamLink = Song['streamLinks'][0];
-
-/**
  * Song download link
  */
 export type DownloadLink = Song['downloadLinks'][0];
