@@ -3,9 +3,7 @@
   The page title is set through the headerTitle store.
 -->
 <script lang="ts">
-  import { goto } from '$app/navigation';
   import { page } from '$app/stores';
-  import Button from '$lib/components/ui/button/button.svelte';
   import MaterialSymbol from '../material-symbol.svelte';
   import { PageHeaderTitle } from './store';
 
@@ -18,27 +16,36 @@
 
 <div class="fixed z-50 flex justify-center w-full h-16 p-4 lg:px-0 bg-background">
   <div class="flex flex-row items-center justify-between gap-2 content-width">
-    <Button
-      on:click={() => goto('/')}
-      size="icon"
+    <!-- svelte-ignore a11y-missing-content -->
+    <a
+      class="button__styled hover:bg-accent"
+      href="/"
       style="background-image: url({homeButtonIconUrl});"
-      variant="ghost"
-    ></Button>
+    ></a>
     <span class="ml-2 font-mono text-sm font-semibold truncate grow">{$PageHeaderTitle}</span>
-    <Button
-      size="icon"
-      variant="outline"
-      on:click={() => goto('/tools')}
-      class="{!isHome ? 'opacity-0 pointer-events-none -translate-y-4 ' : ''}transition-all"
-      ><MaterialSymbol>home_repair_service</MaterialSymbol></Button
+    <a
+      class="{!isHome
+        ? 'opacity-0 pointer-events-none -translate-y-4 '
+        : ''}button__styled hover:bg-accent"
+      href="/tools"
     >
+      <MaterialSymbol>home_repair_service</MaterialSymbol>
+    </a>
     {#if isLoggedIn}
-      <Button
-        size="icon"
-        on:click={() => goto('/songs/add')}
-        class="{!isHome ? 'opacity-0 pointer-events-none -translate-y-4 ' : ''}transition-all"
-        ><MaterialSymbol class="text-background">add</MaterialSymbol></Button
+      <a
+        class="{!isHome
+          ? 'opacity-0 pointer-events-none -translate-y-4 '
+          : ''}button__styled bg-main-text text-background hover:bg-opacity-85"
+        href="/songs/add"
       >
+        <MaterialSymbol class="text-background">add</MaterialSymbol>
+      </a>
     {/if}
   </div>
 </div>
+
+<style scoped>
+  .button__styled {
+    @apply border grow-0 flex justify-center items-center w-10 h-10 transition-colors rounded-md;
+  }
+</style>
