@@ -11,6 +11,7 @@
   import { onMount } from 'svelte';
   import type { PageData } from './$types';
   import SongInfoSheet from './_components/song-info-sheet.svelte';
+  import SoundcloudEmbed from './_components/soundcloud-embed.svelte';
 
   export let data: PageData;
 
@@ -21,6 +22,7 @@
 
   const song = data.song;
   const platforms = song.streamLinks.map((x) => resolvePlatform(x));
+  const soundcloudLink = song.streamLinks.find((x) => x.includes('soundcloud'));
 
   setPageHeaderTitle(song.title);
 
@@ -89,6 +91,10 @@
     </div>
     <!-- BUTTONS -->
     <div class="flex flex-col items-stretch justify-center gap-2 px-4">
+      {#if soundcloudLink}
+        <SoundcloudEmbed url={soundcloudLink} />
+        <SpacerHandle light={true} />
+      {/if}
       {#each song.streamLinks as link, index}
         <Button
           class="flex gap-2 truncate shadow-xl h-14"

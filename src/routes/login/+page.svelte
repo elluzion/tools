@@ -4,25 +4,18 @@
   import type { PageData } from './$types';
 
   export let data: PageData;
-  let { supabase, session } = data;
+  let { supabase, session, db } = data;
 
   setPageHeaderTitle('Login');
 
   async function login() {
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: 'github',
-      options: {
-        redirectTo: location.origin + '/login/callback',
-      },
-    });
+    const error = await db.auth.signIn();
     if (error) console.log(error);
   }
 
   async function logout() {
-    const { error } = await supabase.auth.signOut();
-    if (!error) {
-      location.reload();
-    }
+    const error = await db.auth.signOut();
+    if (!error) location.reload();
   }
 </script>
 
@@ -32,7 +25,6 @@
 
 <div class="flex flex-col gap-2 content-wrapper">
   <h1>Login</h1>
-
   {#if session}
     <p>You are already logged in</p>
     <Button on:click={logout}>Logout</Button>
