@@ -6,12 +6,12 @@
 
 @font-face {
   font-family: 'Geist';
-  src: url('/fonts/GeistVariable.ttf');
+  src: url('/res/fonts/GeistVariable.ttf');
 }
 
 @font-face {
   font-family: 'JetBrains Mono';
-  src: url('/fonts/JetBrainsMonoVariable.ttf');
+  src: url('/res/fonts/JetBrainsMonoVariable.ttf');
 }
 
 @layer base {

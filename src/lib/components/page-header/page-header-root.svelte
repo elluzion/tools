@@ -7,7 +7,7 @@
   import MaterialSymbol from '../material-symbol.svelte';
   import { PageHeaderTitle } from './store';
 
-  const homeButtonIconUrl = '/icons/elluzion_small_icon.svg';
+  const homeButtonIconUrl = '/res/icons/elluzion_small_icon.svg';
 
   export let isLoggedIn: boolean;
 

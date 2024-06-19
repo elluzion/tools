@@ -35,6 +35,6 @@
     @apply block rounded-md border border-transparent z-0 h-12 w-12;
     content: ' ';
     transform: translate(-1px, -1px);
-    background-image: url('/icons/album_art_default.svg');
+    background-image: url('/res/icons/album_art_default.svg');
   }
 </style>

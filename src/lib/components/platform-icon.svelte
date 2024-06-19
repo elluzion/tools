@@ -23,7 +23,7 @@
   export let href: string | undefined = undefined;
 
   $: svgContent = '';
-  $: platformIconPath = `/icons/platforms/${platform}.svg`;
+  $: platformIconPath = `/res/icons/platforms/${platform}.svg`;
   $: {
     platform;
     getPlatformIconPath();
