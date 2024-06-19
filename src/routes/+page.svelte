@@ -4,8 +4,11 @@
   import type { PageData } from './$types';
   import LatestReleaseCard from './_components/latest-release-card.svelte';
   import ReleaseItem from './_components/release-item.svelte';
+  import UserStateCard from './_components/user-state-card.svelte';
 
   export let data: PageData;
+  $: ({ session, db } = data);
+
   if (!data.songs) throw new Error('No songs found');
   const songs = data.songs!;
   const socialLinks = data.socialLinks!;
@@ -44,4 +47,8 @@
   {#each songs.slice(1) as song}
     <ReleaseItem {song} />
   {/each}
+
+  {#if session}
+    <UserStateCard {db} />
+  {/if}
 </div>
