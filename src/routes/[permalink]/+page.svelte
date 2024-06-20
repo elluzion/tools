@@ -1,5 +1,6 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
+  import { page } from '$app/stores';
   import MaterialSymbol from '$lib/components/material-symbol.svelte';
   import { setPageHeaderTitle } from '$lib/components/page-header';
   import PlatformIcon from '$lib/components/platform-icon.svelte';
@@ -15,7 +16,7 @@
 
   export let data: PageData;
 
-  $: ({ session } = data);
+  $: ({ session, metadata } = data);
 
   let foreground: HTMLDivElement;
   let backgroundOpacity: number = 1;
@@ -51,7 +52,12 @@
 </script>
 
 <svelte:head>
-  <title>{data.song.title} | Elluzion</title>
+  <title>{metadata.title} | Elluzion</title>
+  <meta name="description" content={metadata.description} />
+  <meta property="og:title" content={metadata.title} />
+  <meta property="og:type" content="music:song" />
+  <meta property="og:url" content={$page.url.pathname} />
+  <meta property="og:image" content={metadata.image} />
 </svelte:head>
 
 <div class="!p-0 !mt-0 content-wrapper rounded-t-3xl overflow-hidden">
