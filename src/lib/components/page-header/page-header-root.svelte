@@ -44,7 +44,7 @@
   </div>
 </div>
 
-<style scoped>
+<style>
   .button__styled {
     @apply border grow-0 flex justify-center items-center w-10 h-10 transition-colors rounded-md;
   }

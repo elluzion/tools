@@ -20,7 +20,7 @@
   />
 </div>
 
-<style scoped>
+<style>
   .animate {
     animation: fadeInAnimation cubic-bezier(0.33, 1, 0.68, 1) 400ms;
     animation-delay: 150ms;

@@ -24,7 +24,7 @@
   <Form.FieldErrors />
 </Form.Field>
 
-<style lang="postcss" scoped>
+<style lang="postcss">
   img {
     &:hover {
       opacity: 0;
