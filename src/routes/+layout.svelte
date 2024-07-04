@@ -1,8 +1,9 @@
-<script>
+<script lang="ts">
   import { browser } from '$app/environment';
   import { invalidate } from '$app/navigation';
   import { navigating } from '$app/stores';
   import { PageHeader } from '$lib/components/page-header';
+  import Lenis from 'lenis';
   import { onMount } from 'svelte';
   import { Toaster } from 'svelte-french-toast';
   import { Circle } from 'svelte-loading-spinners';
@@ -20,6 +21,18 @@
       }
     });
 
+    // Lenis scroll
+    const lenis = new Lenis({
+      duration: 0.6,
+      easing: (x) => 1 - Math.pow(1 - x, 5),
+    });
+
+    function raf(time: DOMHighResTimeStamp) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
     return () => data.subscription.unsubscribe();
   });
 </script>
