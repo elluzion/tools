@@ -53,7 +53,7 @@
 
     $formData.artists = [...$formData.artists, ...data.artists];
     $formData.title = data.title;
-    $formData.permalink = data.permalink.slice(0, 19);
+    $formData.permalink = data.permalink.slice(0, 49);
     $formData.releaseDate = new Date(data.releaseDate);
     $formData.label = data.label;
     $formData.type = data.type;
