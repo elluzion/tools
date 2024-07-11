@@ -1,12 +1,8 @@
 <script lang="ts">
   import Card from '$lib/components/card.svelte';
   import { setPageHeaderTitle } from '$lib/components/page-header';
+  import type { Tool } from '$lib/types/tools';
 
-  type Tool = {
-    name: string;
-    description: string;
-    path: string;
-  };
   const tools: Tool[] = [
     {
       name: 'Audio analyzer',
