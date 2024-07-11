@@ -1,8 +1,9 @@
 <script lang="ts">
   import MaterialSymbol from '$lib/components/material-symbol.svelte';
   import { createEventDispatcher } from 'svelte';
+  import toast from 'svelte-french-toast';
 
-  const dispatch = createEventDispatcher<{ submit: File }>();
+  const ALLOWED_FILE_TYPES = ['audio/wav', 'audio/flac', 'audio/mpeg'];
 
   export let isLoading: boolean;
   export let loadingStatusMessage: string;
@@ -10,6 +11,7 @@
 
   let uploadOverlay: HTMLLabelElement;
 
+  // Input hover
   const hoverOverlayClasses = ['!ring-2', '!ring-ring', '!ring-offset-2', '!bg-opacity-100'];
 
   function handleInputHoverOn() {
@@ -27,18 +29,14 @@
 
     // error: file type invalid
     if (!ALLOWED_FILE_TYPES.includes(file.type)) {
-      // toast({
-      //   title: 'File type not allowed!',
-      //   description: `File has to be of type ${ALLOWED_FILE_TYPES.join(', ')}`,
-      // });
+      toast.error(`File has to be of type ${ALLOWED_FILE_TYPES.join(', ')}`);
       return;
     }
 
     // all correct
+    const dispatch = createEventDispatcher<{ submit: File }>();
     dispatch('submit', file);
   }
-
-  const ALLOWED_FILE_TYPES = ['audio/wav', 'audio/flac', 'audio/mpeg'];
 </script>
 
 <div class="h-28">

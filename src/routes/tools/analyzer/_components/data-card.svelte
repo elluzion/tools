@@ -10,32 +10,22 @@
   export let symbol: string;
 
   let isShowing = false;
-
   let hasCopied = false;
-  let container: HTMLDivElement;
 
   // Might error out in debug due to insecure origin settings, should be fine in production
   function handleCopyClicked() {
     navigator.clipboard.writeText(subTitle).then(() => {
       hasCopied = true;
-      setTimeout(() => {
-        hasCopied = false;
-      }, 2000);
+      setTimeout(() => (hasCopied = false), 2000);
     });
   }
 
   onMount(() => {
-    setTimeout(() => {
-      isShowing = true;
-    }, 50);
+    setTimeout(() => (isShowing = true), 50);
   });
 </script>
 
-<div
-  bind:this={container}
-  class="group {isShowing ? '!opacity-100 !translate-y-0' : ''}"
-  id="container"
->
+<div class="group {isShowing ? '!opacity-100 !translate-y-0' : ''}" id="container">
   <div class="flex items-center gap-2 font-semibold">
     <MaterialSymbol>{symbol}</MaterialSymbol>
     <span class="sm:text-lg grow">{title}</span>
