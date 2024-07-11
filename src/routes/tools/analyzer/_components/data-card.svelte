@@ -45,11 +45,12 @@
       on:click={!hasCopied ? handleCopyClicked : () => {}}
       class="opacity-0 cursor-pointer group-hover:opacity-100 text-muted-text"
     >
-      <MaterialSymbol class="text-muted-text">{hasCopied ? 'check' : 'content_copy'}</MaterialSymbol
+      <MaterialSymbol class={hasCopied ? 'text-green-400' : 'text-muted-text'}
+        >{hasCopied ? 'check' : 'content_copy'}</MaterialSymbol
       >
     </div>
   </div>
-  <span>{subTitle}</span>
+  <span class="font-mono text-muted-text">{subTitle}</span>
 </div>
 
 <style lang="postcss">
