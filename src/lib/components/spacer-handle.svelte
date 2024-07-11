@@ -5,5 +5,5 @@
 </script>
 
 <div class="flex justify-center" transition:fade={{ duration: 100 }}>
-  <span class="w-16 h-1 rounded-full {light ? 'bg-muted-text' : 'bg-elevation-3'}" />
+  <span class="w-16 h-0.5 rounded-full {light ? 'bg-muted-text/60' : 'bg-elevation-3'}" />
 </div>
