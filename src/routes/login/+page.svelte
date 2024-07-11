@@ -24,7 +24,6 @@
 </svelte:head>
 
 <div class="flex flex-col gap-2 content-wrapper">
-  <h1>Login</h1>
   {#if session}
     <p>You are already logged in</p>
     <Button on:click={logout}>Logout</Button>
