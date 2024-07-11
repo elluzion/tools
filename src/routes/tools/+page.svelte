@@ -24,7 +24,6 @@
 </svelte:head>
 
 <div class="flex flex-col gap-2 content-wrapper">
-  <h1>Tools</h1>
   <div>
     {#each tools as tool}
       <a href="/tools/{tool.path}">
