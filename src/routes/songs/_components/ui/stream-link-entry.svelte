@@ -3,7 +3,7 @@
   import PlatformIcon from '$lib/components/platform-icon.svelte';
   import { Button } from '$lib/components/ui/button';
   import { resolvePlatform } from '$lib/shared/platforms';
-  import { getFormStore } from '../../stores';
+  import { getFormStore } from '../../_lib/song-form-store';
   import SlimListEntry from './slim-list-entry.svelte';
 
   export let url: string;

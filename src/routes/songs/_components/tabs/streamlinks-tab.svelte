@@ -11,7 +11,7 @@
   import Formatter from '$lib/utilities/formatter';
   import Requester from '$lib/utilities/requester';
   import toast from 'svelte-french-toast';
-  import { getFormStore } from '../../stores';
+  import { getFormStore } from '../../_lib/song-form-store';
   import StreamLinkEntry from '../ui/stream-link-entry.svelte';
 
   const formStore = getFormStore();

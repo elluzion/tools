@@ -2,7 +2,7 @@ import type { PostgrestError } from '@supabase/supabase-js';
 import { error, redirect } from '@sveltejs/kit';
 import { fail, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
-import { songFormSchema } from '../song-form';
+import { songFormSchema } from '../_lib/song-form';
 import type { PageServerLoad } from './$types';
 
 /** Asynchronously load the form validator and the form based on the schema */

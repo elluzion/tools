@@ -11,8 +11,8 @@
   import Page3 from '../_components/page3.svelte';
   import BottomControls from '../_components/ui/bottom-controls.svelte';
   import StepsBadge from '../_components/ui/steps-badge.svelte';
-  import { songFormSchema } from '../song-form';
-  import { initFormStore } from '../stores';
+  import { songFormSchema } from '../_lib/song-form';
+  import { initFormStore } from '../_lib/song-form-store';
 
   export let data;
 
@@ -44,12 +44,10 @@
     },
   });
 
-  const formStore = initFormStore({
-    page: { current: 1, total: 3 },
-    form: superform,
-    showSoundcloudImport: false,
-    isEditing: true,
-  });
+  const formStore = initFormStore(superform);
+  // Page is an edit page
+  $formStore.isEditing = true;
+  $formStore.showSoundcloudImport = false;
 
   // Set initial values from Song
   superform.form.set(data.song);
@@ -67,7 +65,7 @@
   <title>Edit {data.song?.title}</title>
 </svelte:head>
 
-<div class="{'content-wrapper'} flex flex-col gap-3 h-contentDvh !px-0 !mt-0">
+<div class="content-wrapper flex flex-col gap-3 h-contentDvh !px-0 !mt-0">
   <StepsBadge class="ml-4 pointer-events-none w-min" />
   <div class="flex flex-col w-full px-4 overflow-y-scroll h-contentDvh">
     <form method="POST" action="?/update" use:enhance>

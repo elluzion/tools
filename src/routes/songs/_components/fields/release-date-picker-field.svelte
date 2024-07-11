@@ -11,7 +11,7 @@
   } from '@internationalized/date';
   import CalendarIcon from 'lucide-svelte/icons/calendar';
   import { onMount } from 'svelte';
-  import { getFormStore } from '../../stores';
+  import { getFormStore } from '../../_lib/song-form-store';
 
   const formStore = getFormStore();
   const df = new DateFormatter('en-US', {

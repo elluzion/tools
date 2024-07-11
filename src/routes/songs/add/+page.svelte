@@ -9,8 +9,8 @@
   import Page3 from '../_components/page3.svelte';
   import BottomControls from '../_components/ui/bottom-controls.svelte';
   import StepsBadge from '../_components/ui/steps-badge.svelte';
-  import { songFormSchema } from '../song-form';
-  import { initFormStore } from '../stores';
+  import { songFormSchema } from '../_lib/song-form';
+  import { initFormStore } from '../_lib/song-form-store';
 
   export let data;
 
@@ -42,12 +42,7 @@
     },
   });
 
-  const formStore = initFormStore({
-    page: { current: 1, total: 3 },
-    form: superform,
-    showSoundcloudImport: true,
-    isEditing: false,
-  });
+  const formStore = initFormStore(superform);
 
   $: formData = superform.form;
   $: enhance = $formStore.form.enhance;

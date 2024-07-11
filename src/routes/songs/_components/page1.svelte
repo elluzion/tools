@@ -1,7 +1,7 @@
 <script lang="ts">
   import * as Form from '$lib/components/ui/form';
   import { Input } from '$lib/components/ui/input';
-  import { getFormStore } from '../stores';
+  import { getFormStore } from '../_lib/song-form-store';
   import AlbumArtField from './fields/album-art-field.svelte';
   import ArtistsFormField from './fields/artists-form-field.svelte';
   import SoundcloudImportField from './fields/soundcloud-import-field.svelte';

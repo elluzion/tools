@@ -2,7 +2,7 @@
   import MaterialSymbol from '$lib/components/material-symbol.svelte';
   import { Button } from '$lib/components/ui/button';
   import type { Song } from '$lib/types/song';
-  import { getFormStore } from '../../stores';
+  import { getFormStore } from '../../_lib/song-form-store';
   import SlimListEntry from './slim-list-entry.svelte';
 
   const formStore = getFormStore();

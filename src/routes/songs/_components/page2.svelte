@@ -1,7 +1,7 @@
 <script lang="ts">
   import * as Form from '$lib/components/ui/form';
   import { Input } from '$lib/components/ui/input';
-  import { getFormStore } from '../stores';
+  import { getFormStore } from '../_lib/song-form-store';
   import ReleaseDatePickerField from './fields/release-date-picker-field.svelte';
 
   const formStore = getFormStore();

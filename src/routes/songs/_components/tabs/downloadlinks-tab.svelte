@@ -6,7 +6,7 @@
   import * as Select from '$lib/components/ui/select';
   import type { Song } from '$lib/types/song';
   import type { Selected } from 'bits-ui';
-  import { getFormStore } from '../../stores';
+  import { getFormStore } from '../../_lib/song-form-store';
   import DownloadLinkEntry from '../ui/download-link-entry.svelte';
 
   const formStore = getFormStore();

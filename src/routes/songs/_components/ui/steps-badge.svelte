@@ -1,6 +1,6 @@
 <script>
   import Badge from '$lib/components/ui/badge/badge.svelte';
-  import { getFormStore } from '../../stores';
+  import { getFormStore } from '../../_lib/song-form-store';
 
   const store = getFormStore();
 </script>

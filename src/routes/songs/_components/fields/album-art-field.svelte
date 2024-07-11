@@ -1,7 +1,7 @@
 <script>
   import * as Form from '$lib/components/ui/form';
   import { Input } from '$lib/components/ui/input';
-  import { getFormStore } from '../../stores';
+  import { getFormStore } from '../../_lib/song-form-store';
 
   const formStore = getFormStore();
 
