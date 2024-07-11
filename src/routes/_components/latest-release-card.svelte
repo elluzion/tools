@@ -9,7 +9,7 @@
   export let song: Song;
 </script>
 
-<Card class="flex flex-col gap-4">
+<Card class="flex flex-col gap-4 ring-1 ring-border/70">
   <div class="gap-2 w-[calc(100%-72px)]">
     <h5 class="text-xl font-semibold truncate">{song.title}</h5>
     <p class="font-medium truncate text-muted-text">{Formatter.joinList(song.artists)}</p>
