@@ -14,7 +14,7 @@ export default class Songs {
   async getSongs(): Promise<Song[] | undefined> {
     /** SONGS */
     const { data: tracks } = await this.supabase
-      .from('releases_v2')
+      .from('releases')
       .select(songQuery)
       .order('release_date', { ascending: false });
     const songs = tracks?.map((track) => {
@@ -37,7 +37,7 @@ export default class Songs {
 
   async getSong(permalink: string): Promise<Song | undefined> {
     const { data: track } = await this.supabase
-      .from('releases_v2')
+      .from('releases')
       .select(songQuery)
       .eq('permalink', permalink)
       .single();
@@ -63,7 +63,7 @@ export default class Songs {
   }
 
   /**
-   * Inserts a new song into the 'releases_v2' table in the Supabase database.
+   * Inserts a new song into the 'releases' table in the Supabase database.
    *
    * @param {Song} song - The song object containing the details of the song to be inserted.
    * @throws {PostgrestError} - If there is an error inserting the song into the database.
@@ -86,7 +86,7 @@ export default class Songs {
     let id = song.id;
     if (!update) {
       const { data, error } = await this.supabase
-        .from('releases_v2')
+        .from('releases')
         .insert(insertObj)
         .select()
         .single();
@@ -102,7 +102,7 @@ export default class Songs {
       }
 
       const { error } = await this.supabase
-        .from('releases_v2')
+        .from('releases')
         .update(insertObj)
         .eq('id', song.id)
         .select()
@@ -118,7 +118,7 @@ export default class Songs {
   }
 
   async deleteSong(permalink: string) {
-    await this.supabase.from('releases_v2').delete().eq('permalink', permalink);
+    await this.supabase.from('releases').delete().eq('permalink', permalink);
   }
   //#endregion
 
@@ -127,20 +127,20 @@ export default class Songs {
     // Clear existing stream links
     if (update) {
       const { error } = await this.supabase
-        .from('release_links_v2')
+        .from('release_links')
         .delete()
         .match({ release_id: id });
       if (error) throw error;
     }
 
-    type streamLinkDb = Database['public']['Tables']['release_links_v2']['Insert'];
+    type streamLinkDb = Database['public']['Tables']['release_links']['Insert'];
     const mappedStreamLinks: streamLinkDb[] = streamLinks.map((link) => {
       return {
         release_id: id,
         url: link,
       };
     });
-    const { error } = await this.supabase.from('release_links_v2').insert(mappedStreamLinks);
+    const { error } = await this.supabase.from('release_links').insert(mappedStreamLinks);
     if (error) throw error;
   }
 
@@ -148,7 +148,7 @@ export default class Songs {
     // Clear existing download links
     if (update) {
       const { error } = await this.supabase
-        .from('release_downloads_v2')
+        .from('release_downloads')
         .delete()
         .match({ release_id: id });
       if (error) throw error;
@@ -157,14 +157,14 @@ export default class Songs {
     // unlike stream links, download links can be empty
     if (downloadLinks.length === 0) return;
 
-    type downloadLinkDb = Database['public']['Tables']['release_downloads_v2']['Insert'];
+    type downloadLinkDb = Database['public']['Tables']['release_downloads']['Insert'];
     const mappedDownloadLinks: downloadLinkDb[] = downloadLinks.map((link) => {
       return {
         release_id: id,
         ...link,
       };
     });
-    const { error } = await this.supabase.from('release_downloads_v2').insert(mappedDownloadLinks);
+    const { error } = await this.supabase.from('release_downloads').insert(mappedDownloadLinks);
     if (error) throw error;
   }
   //#endregion
@@ -176,8 +176,8 @@ const songQuery = `
   artists,
   title,
   description,
-  stream_links:release_links_v2(url),
-  download_links:release_downloads_v2(url, edit, format),
+  stream_links:release_links(url),
+  download_links:release_downloads(url, edit, format),
   genre,
   release_date,
   label,

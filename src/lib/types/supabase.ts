@@ -3,7 +3,7 @@ export type Json = string | number | boolean | null | { [key: string]: Json | un
 export type Database = {
   public: {
     Tables: {
-      release_downloads_v2: {
+      release_downloads: {
         Row: {
           edit: string;
           format: Database['public']['Enums']['audio-filetype'];
@@ -30,12 +30,12 @@ export type Database = {
             foreignKeyName: 'public_release_downloads_new_release_id_fkey';
             columns: ['release_id'];
             isOneToOne: false;
-            referencedRelation: 'releases_v2';
+            referencedRelation: 'releases';
             referencedColumns: ['id'];
           },
         ];
       };
-      release_links_v2: {
+      release_links: {
         Row: {
           id: number;
           release_id: number;
@@ -56,12 +56,12 @@ export type Database = {
             foreignKeyName: 'public_release_links_new_release_id_fkey';
             columns: ['release_id'];
             isOneToOne: false;
-            referencedRelation: 'releases_v2';
+            referencedRelation: 'releases';
             referencedColumns: ['id'];
           },
         ];
       };
-      releases_v2: {
+      releases: {
         Row: {
           art_url: string;
           artists: string[];
