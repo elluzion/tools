@@ -60,7 +60,7 @@
   <meta property="og:image" content={metadata.image} />
 </svelte:head>
 
-<div class="!p-0 !mt-0 content-wrapper rounded-t-3xl overflow-hidden">
+<div class="!p-0 !mt-0 content-wrapper rounded-t-3xl overflow-hidden" data-lenis-prevent>
   <!-- Blurry background -->
   <div
     style="opacity: {backgroundOpacity};"
