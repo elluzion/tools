@@ -6,6 +6,9 @@ import Db from '$lib/shared/db';
 import type { Database } from '$lib/types/supabase';
 import type { LayoutLoad } from './$types';
 
+import { dev } from '$app/environment';
+import { inject } from '@vercel/analytics';
+
 export const load: LayoutLoad = async ({ data, depends, fetch }) => {
   /**
    * Declare a dependency so the layout can be invalidated, for example, on
@@ -13,6 +16,14 @@ export const load: LayoutLoad = async ({ data, depends, fetch }) => {
    */
   depends('supabase:auth');
 
+  /**
+   * Vercel analytics
+   */
+  inject({ mode: dev ? 'development' : 'production' });
+
+  /**
+   * Supabase client
+   */
   const supabase = isBrowser()
     ? createBrowserClient<Database>(PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY, {
         global: {
