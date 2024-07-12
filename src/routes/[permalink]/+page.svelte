@@ -87,7 +87,7 @@
         class="shadow-2xl w-52 h-52 rounded-2xl"
       />
       <div class="flex flex-col items-center w-full gap-4 px-4 drop-shadow-xl">
-        <h3 class="w-full text-3xl font-semibold tracking-tight text-center truncate">
+        <h3 class="w-full text-3xl font-semibold tracking-tight text-center line-clamp-2">
           {song.title}
         </h3>
         <p class="w-full font-medium text-center truncate opacity-70">
