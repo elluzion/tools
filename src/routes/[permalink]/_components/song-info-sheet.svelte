@@ -44,7 +44,7 @@
   </div>
   <div class="flex flex-col gap-3 *:font-mono *:text-muted-text">
     {#if song.releaseDate}
-      <span>📅 {Formatter.formatDate(song.releaseDate, false)}</span>
+      <span>📅 {Formatter.formatDate(song.releaseDate)}</span>
     {/if}
     {#if song.tempo}
       <span>🐢 {song.tempo}BPM</span>

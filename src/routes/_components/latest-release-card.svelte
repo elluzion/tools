@@ -17,7 +17,7 @@
   <div>
     <Badge variant="secondary" class="truncate pointer-events-none">{song.genre}</Badge>
     <Badge variant="outline" class="truncate pointer-events-none">
-      {Formatter.formatDate(song.releaseDate, false)}
+      {Formatter.formatDate(song.releaseDate)}
     </Badge>
   </div>
   <Button on:click={() => goto(song.permalink)}>Stream</Button>

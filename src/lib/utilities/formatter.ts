@@ -1,6 +1,6 @@
 export default class Formatter {
   //#region Dates
-  static formatDate(date: Date, shorten: boolean): string {
+  static formatDate(date: Date, shorten: boolean = false): string {
     const day = date.getDate();
     const ordinalSuffix: string = Formatter.getOrdinalSuffix(day);
     const monthNames: string[] = [

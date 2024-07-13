@@ -21,9 +21,7 @@ function genMetadata(song: Song) {
   // "<songname (is a <genre> track that) released on <date> (via <label>)."
   const description = `${song.title} ${
     song.genre ? `is a ${song.genre} track that ` : ''
-  }released on ${Formatter.formatDate(song.releaseDate, false)}${
-    song.label ? ` via ${song.label}` : ''
-  }.`;
+  }released on ${Formatter.formatDate(song.releaseDate)}${song.label ? ` via ${song.label}` : ''}.`;
 
   /**
    * Note: this is a hacky way of getting a larger image, since Souncloud could potentially change their API and break it
