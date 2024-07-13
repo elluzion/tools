@@ -11,6 +11,9 @@
 
   let uploadOverlay: HTMLLabelElement;
 
+  // Event dispatcher
+  const dispatch = createEventDispatcher<{ submit: File }>();
+
   // Input hover
   const hoverOverlayClasses = ['!ring-2', '!ring-ring', '!ring-offset-2', '!bg-opacity-100'];
 
@@ -34,7 +37,6 @@
     }
 
     // all correct
-    const dispatch = createEventDispatcher<{ submit: File }>();
     dispatch('submit', file);
   }
 </script>
