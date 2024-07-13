@@ -1,3 +1,4 @@
+import type { Platform } from '$lib/types/platform';
 import Formatter from '$lib/utilities/formatter';
 
 export const MusicPlatforms: Platform[] = [
@@ -106,11 +107,3 @@ export function resolvePlatform(query: string): Platform {
     return Platforms.find((p) => p.id === query) || fallback;
   }
 }
-
-export type Platform = {
-  id: string;
-  name: string;
-  color: string;
-  brightColor: boolean;
-  linkIncludes: string;
-};

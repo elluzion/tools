@@ -7,7 +7,8 @@
   import SpacerHandle from '$lib/components/spacer-handle.svelte';
   import { Badge } from '$lib/components/ui/badge';
   import Button from '$lib/components/ui/button/button.svelte';
-  import { resolvePlatform, type Platform } from '$lib/shared/platforms.js';
+  import { resolvePlatform } from '$lib/shared/platforms.js';
+  import type { Platform } from '$lib/types/platform';
   import { clampNumber } from '$lib/utilities/clamp';
   import Formatter from '$lib/utilities/formatter';
   import { onMount } from 'svelte';
