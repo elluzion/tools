@@ -98,9 +98,11 @@
           {Formatter.joinList(song.artists, true)}
         </p>
         {#if isFutureRelease}
-          <Badge class="flex gap-3 pointer-events-none bg-opacity-30" variant="secondary">
-            <MaterialSymbol class="text-sm">calendar_month</MaterialSymbol>
-            {Formatter.formatDate(song.releaseDate)} ({Formatter.getDaysFromNow(song.releaseDate)} days)
+          <Badge
+            class="flex gap-3 pointer-events-none bg-opacity-30 text-muted-text"
+            variant="secondary"
+          >
+            upcoming ({Formatter.getDaysFromNow(song.releaseDate)} days)
           </Badge>
         {/if}
       </div>

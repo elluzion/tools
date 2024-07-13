@@ -14,7 +14,17 @@
     class="absolute w-16 h-16 transition-opacity duration-500 rounded-md opacity-0 group-hover:opacity-100 blur-2xl -z-10 saturate-200"
   />
   <div class="flex flex-col w-full gap-1">
-    <h5 class="text-lg font-semibold tracking-tight">{song.title}</h5>
+    <h5 class="flex items-center gap-3 text-lg font-semibold tracking-tight">
+      {song.title}
+      {#if song.releaseDate > new Date()}
+        <Badge
+          variant="outline"
+          class="text-xs text-muted-text px-2.5 py-0.5 pointer-events-none h-min text-nowrap"
+        >
+          upcoming
+        </Badge>
+      {/if}
+    </h5>
     <div class="flex items-center w-full gap-2">
       <p class="text-muted-text xs:text-base text-ellipsis">
         {Formatter.joinList(song.artists)}

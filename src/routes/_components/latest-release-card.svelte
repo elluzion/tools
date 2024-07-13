@@ -11,8 +11,17 @@
 
 <Card class="flex flex-col gap-4 ring-1 ring-border/70">
   <div class="gap-2 w-[calc(100%-72px)]">
-    <h5 class="text-xl font-semibold truncate">{song.title}</h5>
-    <p class="font-medium truncate text-muted-text">{Formatter.joinList(song.artists)}</p>
+    <h5 class="flex items-center gap-3 text-xl font-semibold truncate">
+      {song.title}
+      {#if song.releaseDate > new Date()}
+        <Badge
+          variant="outline"
+          class="text-sm text-muted-text px-2.5 py-0.5 pointer-events-none h-min text-nowrap"
+        >
+          upcoming
+        </Badge>
+      {/if}
+    </h5>
   </div>
   <div>
     <Badge variant="secondary" class="truncate pointer-events-none">{song.genre}</Badge>
