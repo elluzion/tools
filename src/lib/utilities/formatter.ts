@@ -29,6 +29,21 @@ export default class Formatter {
 
     return `${day}${ordinalSuffix} ${monthName} ${year}`;
   }
+
+  static getDaysBetweenDates(date1: Date, date2: Date): number {
+    // Convert both dates to milliseconds
+    const date1Ms = date1.getTime();
+    const date2Ms = date2.getTime();
+
+    const differenceMs = Math.abs(date2Ms - date1Ms);
+    const days = Math.floor(differenceMs / 86400000);
+    return days;
+  }
+
+  static getDaysFromNow(date: Date): number {
+    const now = new Date();
+    return Formatter.getDaysBetweenDates(now, date);
+  }
   //#endregion
 
   //#region Lists

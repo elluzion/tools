@@ -5,6 +5,7 @@
   import { setPageHeaderTitle } from '$lib/components/page-header';
   import PlatformIcon from '$lib/components/platform-icon.svelte';
   import SpacerHandle from '$lib/components/spacer-handle.svelte';
+  import { Badge } from '$lib/components/ui/badge';
   import Button from '$lib/components/ui/button/button.svelte';
   import { resolvePlatform, type Platform } from '$lib/shared/platforms.js';
   import { clampNumber } from '$lib/utilities/clamp';
@@ -24,6 +25,8 @@
   const song = data.song;
   const platforms = song.streamLinks.map((x) => resolvePlatform(x));
   const soundcloudLink = song.streamLinks.find((x) => x.includes('soundcloud'));
+
+  $: isFutureRelease = song.releaseDate > new Date();
 
   setPageHeaderTitle(song.title);
 
@@ -93,6 +96,12 @@
         <p class="w-full font-medium text-center truncate opacity-70">
           {Formatter.joinList(song.artists, true)}
         </p>
+        {#if isFutureRelease}
+          <Badge class="flex gap-3 pointer-events-none bg-opacity-30" variant="secondary">
+            <MaterialSymbol class="text-sm">calendar_month</MaterialSymbol>
+            {Formatter.formatDate(song.releaseDate)} ({Formatter.getDaysFromNow(song.releaseDate)} days)
+          </Badge>
+        {/if}
       </div>
     </div>
     <!-- BUTTONS -->

@@ -1,6 +1,8 @@
 <script lang="ts">
+  import InfoCard from '$lib/components/info-card.svelte';
   import * as Form from '$lib/components/ui/form';
   import { Input } from '$lib/components/ui/input';
+  import Formatter from '$lib/utilities/formatter';
   import { getFormStore } from '../_lib/song-form-store';
   import ReleaseDatePickerField from './fields/release-date-picker-field.svelte';
 
@@ -8,6 +10,8 @@
 
   $: form = $formStore.form;
   $: formData = $formStore.form.form;
+
+  $: isFutureRelease = $formData.releaseDate > new Date();
 </script>
 
 <Form.Field {form} name="title">
@@ -74,3 +78,10 @@
     <Form.FieldErrors />
   </Form.Field>
 </div>
+
+{#if isFutureRelease}
+  <InfoCard>
+    This release is set to be released on {Formatter.formatDate($formData.releaseDate)}, <br />
+    it will be invisible to the public until it is released.
+  </InfoCard>
+{/if}
