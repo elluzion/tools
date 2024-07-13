@@ -64,6 +64,26 @@ export default class Formatter {
   }
   //#endregion
 
+  //#region URLs
+  static extractDomain(url: string): string | undefined {
+    try {
+      // Create a URL object
+      const urlObject = new URL(url);
+
+      // Extract the hostname
+      let domain = urlObject.hostname;
+
+      // Remove 'www.' if present
+      domain = domain.replace(/^www\./, '');
+
+      return domain;
+    } catch (error) {
+      // The URL is invalid
+      return undefined;
+    }
+  }
+  //#endregion
+
   //#region Private
   private static getOrdinalSuffix(day: number): string {
     if (day >= 11 && day <= 13) {

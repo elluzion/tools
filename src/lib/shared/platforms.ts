@@ -1,3 +1,5 @@
+import Formatter from '$lib/utilities/formatter';
+
 export const MusicPlatforms: Platform[] = [
   {
     id: 'amazon-music',
@@ -91,8 +93,15 @@ export function resolvePlatform(query: string): Platform {
     linkIncludes: '',
   };
 
-  if (query.startsWith('https://')) {
-    return Platforms.find((x) => query.includes(x.linkIncludes)) || fallback;
+  if (query.startsWith('http://') || query.startsWith('https://')) {
+    // If the query is a URL, search for a platform that includes the URL in its linkIncludes property
+    const platform = Platforms.find((x) => query.includes(x.linkIncludes));
+
+    if (!platform) {
+      fallback.name = Formatter.extractDomain(query) || fallback.name;
+      return fallback;
+    }
+    return platform;
   } else {
     return Platforms.find((p) => p.id === query) || fallback;
   }
