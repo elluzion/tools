@@ -14,27 +14,24 @@
   $: isHome = $page.url.pathname === '/';
 </script>
 
-<div class="fixed z-50 flex justify-center w-full h-16 p-4 lg:px-0 bg-background">
-  <div class="flex flex-row items-center justify-between gap-2 content-width">
+<div class="fixed z-50 flex justify-center w-screen p-4">
+  <div
+    class="flex flex-row items-center justify-between gap-2 p-2 rounded-full content-width bg-opacity-90 backdrop-blur-3xl bg-elevation-1"
+  >
     <!-- svelte-ignore a11y-missing-content -->
     <a
       class="button__styled hover:bg-accent"
       href="/"
-      style="background-image: url({homeButtonIconUrl});"
+      style="background: url({homeButtonIconUrl}) no-repeat center;"
     ></a>
     <span class="ml-2 font-mono text-sm font-semibold truncate grow">{$PageHeaderTitle}</span>
-    <a
-      class="{!isHome
-        ? 'opacity-0 pointer-events-none -translate-y-4 '
-        : ''}button__styled hover:bg-accent"
-      href="/tools"
-    >
+    <a class="{!isHome ? '!hidden ' : ''}button__styled hover:bg-accent" href="/tools">
       <MaterialSymbol>home_repair_service</MaterialSymbol>
     </a>
     {#if isLoggedIn}
       <a
         class="{!isHome
-          ? 'opacity-0 pointer-events-none -translate-y-4 '
+          ? '!hidden '
           : ''}button__styled bg-main-text text-background hover:bg-opacity-85"
         href="/songs/add"
       >
@@ -46,6 +43,6 @@
 
 <style>
   .button__styled {
-    @apply border grow-0 flex justify-center items-center w-10 h-10 transition-colors rounded-md;
+    @apply border grow-0 flex justify-center shrink-0 items-center w-12 h-12 transition-colors rounded-full;
   }
 </style>

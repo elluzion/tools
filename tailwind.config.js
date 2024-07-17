@@ -70,7 +70,7 @@ export default {
         sm: 'calc(var(--radius) - 4px)',
       },
       spacing: {
-        contentDvh: 'calc(100dvh - 64px)',
+        contentDvh: 'calc(100dvh - 96px)',
       },
       screens: {
         xs: '400px',

@@ -61,7 +61,7 @@ body {
 }
 
 .content-wrapper {
-  @apply p-4 mt-4 content-width lg:px-0;
+  @apply p-4 content-width lg:px-0;
 }
 
 h1 {

@@ -55,7 +55,7 @@
   <title>Add song</title>
 </svelte:head>
 
-<div class="{'content-wrapper'} flex flex-col gap-3 h-contentDvh !px-0 !mt-0">
+<div class="{'content-wrapper'} flex flex-col gap-3 h-contentDvh !px-0">
   <StepsBadge class="ml-4 pointer-events-none w-min" />
   <div class="flex flex-col w-full px-4 overflow-y-scroll h-contentDvh">
     <form method="POST" action="?/add" use:enhance>

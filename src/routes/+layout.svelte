@@ -56,7 +56,7 @@
     pointer-events: {isNav ? 'none' : 'all'};
     scale: {isNav ? 0.99 : 1};
     "
-  class="flex justify-center w-screen pt-16 transition-[opacity,scale]"
+  class="flex justify-center w-screen pt-24 transition-[opacity,scale]"
 >
   <slot />
 </div>
