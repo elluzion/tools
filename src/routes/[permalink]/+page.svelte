@@ -9,9 +9,7 @@
   import Button from '$lib/components/ui/button/button.svelte';
   import { resolvePlatform } from '$lib/shared/platforms.js';
   import type { Platform } from '$lib/types/platform';
-  import { clampNumber } from '$lib/utilities/clamp';
   import Formatter from '$lib/utilities/formatter';
-  import { onMount } from 'svelte';
   import type { PageData } from './$types';
   import SongInfoSheet from './_components/song-info-sheet.svelte';
   import SoundcloudEmbed from './_components/soundcloud-embed.svelte';
@@ -19,9 +17,6 @@
   export let data: PageData;
 
   $: ({ session, metadata } = data);
-
-  let foreground: HTMLDivElement;
-  let backgroundOpacity: number = 1;
 
   const song = data.song;
   const platforms = song.streamLinks.map((x) => resolvePlatform(x));
@@ -35,25 +30,6 @@
   function getTextColor(platform: Platform) {
     return platform.brightColor ? '#000' : '#fff';
   }
-
-  function getScrollProgress() {
-    const availableScroll = foreground.scrollHeight - foreground.clientHeight;
-    const scrollProgress = clampNumber(foreground.scrollTop / availableScroll, 0, 1);
-    return scrollProgress;
-  }
-
-  function getScrollBackgroundOpacity() {
-    // The max amount that the background can be dimmed
-    const minOpacity = 0.5;
-    const foregroundOpacity = 1 - getScrollProgress() * (1 - minOpacity);
-    return foregroundOpacity;
-  }
-
-  onMount(() => {
-    foreground.addEventListener('scroll', () => {
-      backgroundOpacity = getScrollBackgroundOpacity();
-    });
-  });
 </script>
 
 <svelte:head>
@@ -65,79 +41,68 @@
   <meta property="og:image" content={metadata.image} />
 </svelte:head>
 
-<div class="!p-0 !mt-0 content-wrapper rounded-t-3xl overflow-hidden" data-lenis-prevent>
-  <!-- Blurry background -->
-  <div
-    style="opacity: {backgroundOpacity};"
-    class="pb-12 pointer-events-none content-width h-contentDvh"
-  >
-    <img
-      src={song.artUrl}
-      alt="art"
-      class="w-full h-[600px] blur-3xl"
-      style="mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%,rgba(0,0,0,0) 100%);
-      -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%,rgba(0,0,0,0) 100%);"
-    />
-  </div>
+<div id="contentWrapper" class="!p-0 content-wrapper lg:!w-full -mt-24">
   <!-- Foreground -->
   <div
-    bind:this={foreground}
-    class="fixed overflow-auto -translate-y-full content-width h-contentDvh !pb-[88px] xs:!pb-[104px]"
+    style="background: url({song.artUrl}) no-repeat center/cover;"
+    class="overflow-hidden bg-no-repeat min-h-contentDvh"
   >
-    <!-- TOP -->
-    <div class="flex flex-col items-center justify-center gap-8 h-[450px]">
-      <img
-        src={song.artUrl.replace('large', 't500x500')}
-        alt="art"
-        class="shadow-2xl w-52 h-52 rounded-2xl"
-      />
-      <div class="flex flex-col items-center w-full gap-4 px-4 drop-shadow-xl">
-        <h3 class="w-full text-3xl font-semibold tracking-tight text-center line-clamp-2">
-          {song.title}
-        </h3>
-        <p class="w-full font-medium text-center truncate opacity-70">
-          {Formatter.joinList(song.artists, true)}
-        </p>
-        {#if isFutureRelease}
-          <Badge
-            class="flex gap-3 pointer-events-none bg-opacity-30 text-muted-text"
-            variant="secondary"
+    <div
+      class="flex flex-col items-center w-full pt-20 min-h-contentDvh backdrop-blur-3xl bg-gradient-to-b from-transparent to-background"
+    >
+      <!-- TOP -->
+      <div class="flex flex-col items-center justify-center gap-8 content-width h-[500px]">
+        <img src={song.artUrl} alt="art" class="shadow-2xl w-52 h-52 rounded-2xl" />
+        <div class="flex flex-col items-center w-full gap-4 px-4 drop-shadow-xl">
+          <h3 class="w-full text-3xl font-semibold tracking-tight text-center line-clamp-2">
+            {song.title}
+          </h3>
+          <p class="w-full font-medium text-center truncate opacity-70">
+            {Formatter.joinList(song.artists, true)}
+          </p>
+          {#if isFutureRelease}
+            <Badge
+              class="flex gap-3 pointer-events-none bg-opacity-30 text-muted-text"
+              variant="secondary"
+            >
+              upcoming ({daysToRelease}
+              {daysToRelease == 1 ? 'day' : 'days'})
+            </Badge>
+          {/if}
+        </div>
+      </div>
+      <!-- BUTTONS -->
+      <div
+        class="flex flex-col items-stretch content-width justify-center gap-2 px-4 !pb-[88px] xs:!pb-[104px]"
+      >
+        {#if soundcloudLink}
+          <SoundcloudEmbed url={soundcloudLink} />
+          <SpacerHandle light={true} />
+        {/if}
+        {#each song.streamLinks as link, index}
+          <Button
+            class="flex gap-2 truncate shadow-xl h-14"
+            style="
+              background-color: {platforms[index].color};
+              color: {getTextColor(platforms[index])};"
+            on:click={() => window.open(link, '_blank')}
           >
-            upcoming ({daysToRelease}
-            {daysToRelease == 1 ? 'day' : 'days'})
-          </Badge>
+            <PlatformIcon platform={platforms[index].id} fill={getTextColor(platforms[index])} />
+            {platforms[index].name}
+          </Button>
+        {/each}
+        {#if session}
+          <SpacerHandle light={true} />
+          <Button
+            class="flex gap-2 truncate shadow-xl h-14"
+            on:click={() => goto(`/songs/${song.permalink}`)}
+            ><MaterialSymbol class="text-background">edit</MaterialSymbol> Edit</Button
+          >
         {/if}
       </div>
     </div>
-    <!-- BUTTONS -->
-    <div class="flex flex-col items-stretch justify-center gap-2 px-4">
-      {#if soundcloudLink}
-        <SoundcloudEmbed url={soundcloudLink} />
-        <SpacerHandle light={true} />
-      {/if}
-      {#each song.streamLinks as link, index}
-        <Button
-          class="flex gap-2 truncate shadow-xl h-14"
-          style="
-          background-color: {platforms[index].color};
-          color: {getTextColor(platforms[index])};"
-          on:click={() => window.open(link, '_blank')}
-        >
-          <PlatformIcon platform={platforms[index].id} fill={getTextColor(platforms[index])} />
-          {platforms[index].name}
-        </Button>
-      {/each}
-      {#if session}
-        <SpacerHandle light={true} />
-        <Button
-          class="flex gap-2 truncate shadow-xl h-14"
-          on:click={() => goto(`/songs/${song.permalink}`)}
-          ><MaterialSymbol class="text-background">edit</MaterialSymbol> Edit</Button
-        >
-      {/if}
-    </div>
   </div>
-
-  <!-- Infosheet -->
-  <SongInfoSheet {song} />
 </div>
+
+<!-- Infosheet -->
+<SongInfoSheet {song} />

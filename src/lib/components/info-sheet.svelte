@@ -61,12 +61,19 @@
 
     // If component has been mounted, fade the container in
     isMounted = true;
+
+    // Move container to body to enable fixed scrolling
+    const container = document.querySelector('#infoSheetContainer');
+    const body = document.querySelector('body');
+    if (container && body) {
+      body.appendChild(container);
+    }
   });
   //#endregion
 </script>
 
 <!-- Info Sheet Container -->
-<div id="container" class="{isMounted ? 'opacity-100' : 'opacity-0'} delay-200 transition-opacity">
+<div id="infoSheetContainer" class={isMounted ? 'opacity-100' : 'opacity-0'}>
   <!-- Info Sheet -->
   <div
     id="infoSheet"
@@ -116,34 +123,39 @@
 <style lang="postcss">
   /* Info Sheet */
 
-  #container {
-    @apply fixed inset-0 z-40 flex items-end justify-center w-screen overflow-hidden pointer-events-none p-4 xs:p-6 h-dvh;
+  #infoSheetContainer {
+    @apply fixed inset-0 z-40 flex items-end justify-center w-screen overflow-hidden delay-200 transition-opacity pointer-events-none p-4 xs:p-6 h-dvh;
   }
   #infoSheet {
     @apply flex p-2 rounded-[28px] items-end bg-elevation-1 duration-300 transition-all h-14 shadow-2xl pointer-events-auto overflow-hidden;
+
+    &.expanded {
+      @apply w-full md:w-[500px];
+    }
   }
-  #infoSheet.expanded {
-    @apply w-full md:w-[500px];
-  }
+
   #preview {
     @apply flex w-full items-center gap-4 pl-4;
+
+    &.expanded {
+      @apply justify-end;
+    }
   }
-  #preview.expanded {
-    @apply justify-end;
-  }
+
   #previewContent {
     @apply blur-0 grow select-none transition-all duration-200;
+
+    &.expanded {
+      @apply opacity-0 translate-y-5 blur-md;
+    }
   }
-  #previewContent.expanded {
-    @apply opacity-0 translate-y-5 blur-md;
-  }
+
   #content {
     @apply absolute flex flex-col transition-opacity p-4 h-min duration-300 gap-2 pointer-events-none select-none;
-    @apply w-[calc(100%-32px-16px)]  /* < 400px */
-      xs:w-[calc(100%-48px-16px)]    /* > 400px, < 768px */
-      md:w-[calc(500px-16px)]   /* >768px */;
-  }
-  #content.expanded {
-    @apply pointer-events-auto select-auto;
+    @apply w-[calc(100%-32px-16px)] xs:w-[calc(100%-48px-16px)] md:w-[calc(500px-16px)];
+
+    &.expanded {
+      @apply pointer-events-auto select-auto;
+    }
   }
 </style>
