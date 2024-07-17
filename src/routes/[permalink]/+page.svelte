@@ -28,6 +28,7 @@
   const soundcloudLink = song.streamLinks.find((x) => x.includes('soundcloud'));
 
   $: isFutureRelease = song.releaseDate > new Date();
+  $: daysToRelease = Formatter.getDaysFromNow(song.releaseDate);
 
   setPageHeaderTitle(song.title);
 
@@ -102,7 +103,8 @@
             class="flex gap-3 pointer-events-none bg-opacity-30 text-muted-text"
             variant="secondary"
           >
-            upcoming ({Formatter.getDaysFromNow(song.releaseDate)} days)
+            upcoming ({daysToRelease}
+            {daysToRelease == 1 ? 'day' : 'days'})
           </Badge>
         {/if}
       </div>
