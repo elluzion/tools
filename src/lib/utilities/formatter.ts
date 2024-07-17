@@ -77,6 +77,15 @@ export default class Formatter {
   static cleanWhitespace(input: string, filler?: string) {
     return input.replace(/\s+/g, filler || ' ').trim();
   }
+
+  static improveSoundcloudArtwork(
+    url: string,
+    targetSize: 'large' | 'original' | 't500x500' = 't500x500',
+  ) {
+    if (url.includes('sndcdn.com/artworks-')) {
+      return url.replace(/([tl]\d+x\d+|(?:large|original))(?=\.\w+$)/, targetSize);
+    }
+  }
   //#endregion
 
   //#region URLs

@@ -52,7 +52,11 @@
     >
       <!-- TOP -->
       <div class="flex flex-col items-center justify-center gap-8 content-width h-[500px]">
-        <img src={song.artUrl} alt="art" class="shadow-2xl w-52 h-52 rounded-2xl" />
+        <img
+          src={Formatter.improveSoundcloudArtwork(song.artUrl)}
+          alt="art"
+          class="shadow-2xl w-52 h-52 rounded-2xl"
+        />
         <div class="flex flex-col items-center w-full gap-4 px-4 drop-shadow-xl">
           <h3 class="w-full text-3xl font-semibold tracking-tight text-center line-clamp-2">
             {song.title}
