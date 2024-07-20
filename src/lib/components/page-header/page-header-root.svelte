@@ -43,6 +43,6 @@
 
 <style>
   .button__styled {
-    @apply border grow-0 flex justify-center shrink-0 items-center w-12 h-12 transition-colors rounded-full;
+    @apply grow-0 flex justify-center shrink-0 items-center w-12 h-12 transition-colors rounded-full;
   }
 </style>
