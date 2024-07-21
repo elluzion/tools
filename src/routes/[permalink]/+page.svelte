@@ -10,6 +10,7 @@
   import { resolvePlatform } from '$lib/shared/platforms.js';
   import type { Platform } from '$lib/types/platform';
   import Formatter from '$lib/utilities/formatter';
+  import { onMount } from 'svelte';
   import type { PageData } from './$types';
   import SongInfoSheet from './_components/song-info-sheet.svelte';
   import SoundcloudEmbed from './_components/soundcloud-embed.svelte';
@@ -30,6 +31,15 @@
   function getTextColor(platform: Platform) {
     return platform.brightColor ? '#000' : '#fff';
   }
+
+  onMount(() => {
+    setTimeout(() => {
+      const contentWrapper = document.querySelector('#contentWrapper');
+      if (contentWrapper) {
+        contentWrapper.classList.remove('opacity-0');
+      }
+    });
+  });
 </script>
 
 <svelte:head>
@@ -41,7 +51,10 @@
   <meta property="og:image" content={metadata.image} />
 </svelte:head>
 
-<div id="contentWrapper" class="!p-0 content-wrapper lg:!w-full -mt-24">
+<div
+  id="contentWrapper"
+  class="!p-0 content-wrapper lg:!w-full -mt-24 opacity-0 transition-opacity"
+>
   <!-- Foreground -->
   <div
     style="background: url({song.artUrl}) no-repeat center/cover;"
