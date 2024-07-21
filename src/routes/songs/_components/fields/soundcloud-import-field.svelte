@@ -48,7 +48,7 @@
     );
 
     if (error) {
-      return Promise.reject(JSON.parse(error.message).message);
+      return Promise.reject(error.message);
     }
 
     $formData.artists = [...$formData.artists, ...data.artists];

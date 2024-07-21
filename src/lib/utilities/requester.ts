@@ -51,7 +51,7 @@ async function handleResponse<DataType>(response: Response) {
   // Error handling
   let error = undefined;
   if (!response.ok) {
-    error = new RequesterError(response.status, text);
+    error = new RequesterError(response.status, JSON.parse(text).message || JSON.parse(text));
   }
   return { data, error, response };
 }
