@@ -10,7 +10,7 @@
 </script>
 
 <Card class="flex flex-col gap-4 ring-1 ring-border/70">
-  <div class="gap-2 w-[calc(100%-72px)]">
+  <div class="flex flex-col gap-1 w-[calc(100%-72px)]">
     <h5 class="flex items-center gap-3 text-xl font-semibold truncate">
       {song.title}
       {#if song.releaseDate > new Date()}
@@ -22,6 +22,7 @@
         </Badge>
       {/if}
     </h5>
+    <p class="font-mono text-muted-text">{Formatter.joinList(song.artists, false)}</p>
   </div>
   <div>
     <Badge variant="secondary" class="truncate pointer-events-none">{song.genre}</Badge>
