@@ -10,8 +10,8 @@
 }
 
 @font-face {
-  font-family: 'JetBrains Mono';
-  src: url('/res/fonts/JetBrainsMonoVariable.ttf');
+  font-family: 'Space Grotesk';
+  src: url('/res/fonts/SpaceGroteskVariable.ttf');
 }
 
 @layer base {

@@ -13,7 +13,7 @@ export default {
     },
     fontFamily: {
       sans: ['"Geist"', '"Roboto"', 'sans-serif'],
-      mono: ['"JetBrains Mono"', 'monospace'],
+      mono: ['"Space Grotesk"', 'monospace'],
     },
     extend: {
       colors: {
