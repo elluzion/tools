@@ -85,6 +85,8 @@ export default class Formatter {
     if (url.includes('sndcdn.com/artworks-')) {
       return url.replace(/([tl]\d+x\d+|(?:large|original))(?=\.\w+$)/, targetSize);
     }
+
+    return url;
   }
   //#endregion
 
