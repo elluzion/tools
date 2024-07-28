@@ -9,6 +9,11 @@
       description: 'Receive information about an audio file, such as BPM or key.',
       path: 'analyzer',
     },
+    {
+      name: 'Soundcloud Downloader',
+      description: 'Get info about and download a Soundcloud track.',
+      path: 'soundcloud',
+    },
   ];
 
   // Set page title
@@ -19,17 +24,15 @@
   <title>Tools | Elluzion</title>
 </svelte:head>
 
-<div class="flex flex-col gap-2 content-wrapper">
-  <div>
-    {#each tools as tool}
-      <a href="/tools/{tool.path}">
-        <Card class="transition-colors hover:bg-elevation-2">
-          <span class="text-lg font-medium">
-            {tool.name}
-          </span>
-          <p class="text-muted-text">{tool.description}</p>
-        </Card>
-      </a>
-    {/each}
-  </div>
+<div class="flex flex-col gap-4 content-wrapper">
+  {#each tools as tool}
+    <a href="/tools/{tool.path}">
+      <Card class="flex flex-col">
+        <span class="text-lg font-medium">
+          {tool.name}
+        </span>
+        <p class="text-muted-text">{tool.description}</p>
+      </Card>
+    </a>
+  {/each}
 </div>
