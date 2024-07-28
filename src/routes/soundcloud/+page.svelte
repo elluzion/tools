@@ -1,18 +1,21 @@
 <script lang="ts">
-  import type { APISoundcloudImportResult } from '$lib/api/types/results.js';
+  import type { Api } from '$lib/api';
+  import type { SoundcloudSong } from '$lib/api/types/soundcloud';
   import { setPageHeaderTitle } from '$lib/components/page-header';
   import SpacerHandle from '$lib/components/spacer-handle.svelte';
   import Badge from '$lib/components/ui/badge/badge.svelte';
   import Button from '$lib/components/ui/button/button.svelte';
   import { Input } from '$lib/components/ui/input';
   import Formatter from '$lib/utilities/formatter';
-  import Requester from '$lib/utilities/requester.js';
+  import { treaty } from '@elysiajs/eden';
   import toast from 'svelte-french-toast';
 
   let inputUrl: string | undefined = undefined;
-  let trackData: APISoundcloudImportResult | undefined = undefined;
+  let trackData: SoundcloudSong | undefined = undefined;
 
   async function request() {
+    const client = treaty<Api>(location.origin);
+
     if (!inputUrl) {
       toast.error('No URL provided');
       return;
@@ -28,26 +31,45 @@
     trackData = undefined;
 
     // Request data from API
-    const { data, error } = await Requester.post<APISoundcloudImportResult>(
-      '/api/songs/soundcloud-import',
-      { url: inputUrl },
-    );
-
+    const { data, error } = await client.api.soundcloud.import.get({
+      query: { url: inputUrl },
+    });
     // Error happened while requesting
     if (error) {
-      toast.error(error.message);
-      console.log(error.message);
+      toast.error(error.value);
+      console.log(error);
       return;
     }
-
-    if (!data.artUrl) {
-      toast.error('Song has no artwork');
-      return;
-    }
-
-    console.log(data);
 
     trackData = data;
+    inputUrl = undefined;
+
+    toast.success('Successful');
+  }
+
+  async function download() {
+    if (!trackData) return;
+
+    const url = `${window.origin}/api/soundcloud/download?url=${encodeURIComponent(trackData.url)}`;
+    const filename = `${Formatter.joinList(trackData!!.artists, false)} - ${trackData!!.title}.mp3`;
+
+    await fetch(url)
+      .then((res) => (res.status === 200 ? res.blob() : Promise.reject('something went wrong')))
+      .then((blob) => {
+        const objectUrl = window.URL.createObjectURL(blob);
+
+        const a = document.createElement('a');
+        a.style.display = 'none';
+
+        a.href = objectUrl;
+        a.download = filename;
+
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+
+        a.remove();
+      });
   }
 
   setPageHeaderTitle('Soundcloud Loader');
@@ -71,14 +93,16 @@
           <p class="mb-1 font-mono text-muted-text">
             {Formatter.joinList(trackData.artists, true)}
           </p>
-          <Badge variant="secondary" class="font-mono text-nowrap w-min text-muted-text">
-            {trackData.genre}
-          </Badge>
+          {#if trackData.genre}
+            <Badge variant="secondary" class="font-mono text-nowrap w-min text-muted-text">
+              {trackData.genre}
+            </Badge>
+          {/if}
         </div>
       </div>
 
       <div>
-        <Button>Download</Button>
+        <Button on:click={() => download()} class="w-full">Download</Button>
       </div>
     </div>
   {/if}

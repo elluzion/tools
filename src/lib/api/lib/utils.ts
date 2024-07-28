@@ -1,58 +1,5 @@
 import Formatter from '$lib/utilities/formatter';
-import fs from 'node:fs';
-import type Soundcloud from 'soundcloud.ts';
-import type { SoundcloudImportItem } from './types';
 
-/**
- * Imports a song from Soundcloud based on the provided URL.
- *
- * @param {string} url - The URL of the Soundcloud track.
- * @return {Promise<SoundcloudImportItem>} The parsed data of the imported song.
- * @throws {Error}
- */
-export async function importFromSoundcloud(api: Soundcloud, url: string) {
-  const track = await api.tracks.getV2(url);
-
-  const parsedQuery = parseQuery(track.title);
-  const releaseDate = new Date(track.release_date || track.display_date);
-  const labelName = track.label_name || track.user.username;
-
-  if (parsedQuery.artists.length == 0) {
-    parsedQuery.artists.push(track.user.username);
-  }
-
-  const data: SoundcloudImportItem = {
-    artists: parsedQuery.artists,
-    title: parsedQuery.title,
-    permalink: track.permalink,
-    releaseDate: releaseDate,
-    label: labelName,
-    artUrl: track.artwork_url || track.user.avatar_url,
-    genre: track.genre,
-    type: parsedQuery.type,
-  };
-
-  return data;
-}
-
-export async function downloadFromSoundcloud(api: Soundcloud, url: string) {
-  try {
-    const track = await api.tracks.getV2(url);
-
-    let filePath = `temp/tracks/${track.id}`;
-    filePath = await api.util.downloadTrack(url, filePath);
-
-    // Read the downloaded audio file as a buffer
-    const file = fs.readFileSync(filePath);
-
-    // Physical File is no longer needed
-    fs.unlinkSync(filePath);
-
-    return file;
-  } catch (e) {
-    return undefined;
-  }
-}
 /**
  *
  * @param query A song title query such as "Artist 1 , Artist 2 & Artist 3 - Song Title (feat. Artist 4) - Artist 5 Remix"
