@@ -1,5 +1,6 @@
 import { APIError, APIErrorResponse } from '$lib/api/error';
-import SongServices from '$lib/api/songs/song-services';
+import { importFromSoundcloud } from '$lib/api/songs';
+import Soundcloud from 'soundcloud.ts';
 import type { RequestHandler } from './$types';
 
 export const POST: RequestHandler = async ({ request }) => {
@@ -26,8 +27,8 @@ export const POST: RequestHandler = async ({ request }) => {
 
     try {
       // Fetch and return object from Soundcloud
-      const songServices = new SongServices();
-      const data = await songServices.importFromSoundcloud(url);
+      const soundcloud = new Soundcloud();
+      const data = await importFromSoundcloud(soundcloud, url);
       return new Response(JSON.stringify(data), { status: 200 });
     } catch (_e) {
       throw new APIError(500, 'Song not found', url);

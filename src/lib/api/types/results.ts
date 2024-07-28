@@ -1,4 +1,4 @@
-import type { SoundcloudImportItem } from '$lib/api/songs/song-services/types';
+import type { SoundcloudImportItem } from '$lib/api/songs/types';
 
 /**
  * /songs/soundcloud-import
