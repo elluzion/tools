@@ -4,12 +4,9 @@
 -->
 <script lang="ts">
   import { page } from '$app/stores';
-  import MaterialSymbol from '../material-symbol.svelte';
   import { PageHeaderTitle } from './store';
 
   const homeButtonIconUrl = '/res/icons/elluzion_small_icon.svg';
-
-  export let isLoggedIn: boolean;
 
   $: isHome = $page.url.pathname === '/';
 </script>
@@ -25,19 +22,6 @@
       style="background: url({homeButtonIconUrl}) no-repeat center;"
     ></a>
     <span class="font-mono text-sm font-semibold truncate grow">{$PageHeaderTitle}</span>
-    <a class="{!isHome ? '!hidden ' : ''}button__styled hover:bg-accent" href="/tools">
-      <MaterialSymbol>home_repair_service</MaterialSymbol>
-    </a>
-    {#if isLoggedIn}
-      <a
-        class="{!isHome
-          ? '!hidden '
-          : ''}button__styled bg-main-text text-background hover:bg-opacity-85"
-        href="/songs/add"
-      >
-        <MaterialSymbol class="text-background">add</MaterialSymbol>
-      </a>
-    {/if}
   </div>
 </div>
 

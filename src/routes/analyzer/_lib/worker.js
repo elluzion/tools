@@ -1,5 +1,5 @@
 /**
- @typedef {import("./types.ts").WorkerUpdate} WorkerReturnMessage
+ @typedef {import("./types.js").WorkerUpdate} WorkerReturnMessage
  */
 
 importScripts('/scripts/essentia-wasm.es.js');

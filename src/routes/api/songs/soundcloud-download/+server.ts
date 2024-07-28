@@ -33,13 +33,13 @@ export const POST: RequestHandler = async ({ request }) => {
       const songServices = new SongServices();
 
       const data = await songServices.downloadFromSoundcloud(url);
-      // return {
-      //   status: 200,
-      //   // headers: {
-      //   //   'Content-Type': 'audio/mpeg',
-      //   // },
-      //   body: data,
-      // };
+      return {
+        status: 200,
+        // headers: {
+        //   'Content-Type': 'audio/mpeg',
+        // },
+        body: data,
+      };
     } catch (_e) {
       throw new APIError(500, 'Song download link not found', url);
     }

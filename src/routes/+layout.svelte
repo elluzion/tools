@@ -1,6 +1,5 @@
 <script lang="ts">
   import { browser } from '$app/environment';
-  import { invalidate } from '$app/navigation';
   import { navigating } from '$app/stores';
   import { PageHeader } from '$lib/components/page-header';
   import Lenis from 'lenis';
@@ -9,18 +8,9 @@
   import { Circle } from 'svelte-loading-spinners';
   import '../app.css';
 
-  export let data;
-
-  $: ({ session, supabase } = data);
   $: isNav = browser ? $navigating : false;
 
   onMount(() => {
-    const { data } = supabase.auth.onAuthStateChange((_, newSession) => {
-      if (newSession?.expires_at !== session?.expires_at) {
-        invalidate('supabase:auth');
-      }
-    });
-
     // Lenis scroll
     const lenis = new Lenis({
       duration: 0.6,
@@ -33,7 +23,6 @@
     }
 
     requestAnimationFrame(raf);
-    return () => data.subscription.unsubscribe();
   });
 </script>
 
@@ -45,7 +34,7 @@
       '!font-mono !font-medium [&>.message]:!text-muted-text !px-6 !py-4 !mb-2 !bg-elevation-2 !rounded-full !flex !gap-2 !shadow-2xl',
   }}
 />
-<PageHeader isLoggedIn={!!session} />
+<PageHeader />
 {#if isNav}
   <div class="fixed z-50 flex items-center justify-center w-full h-full">
     <Circle size="32" color="#fafafa" unit="px" duration="1s" />

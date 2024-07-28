@@ -1,51 +1,38 @@
 <script lang="ts">
+  import Card from '$lib/components/card.svelte';
   import { setPageHeaderTitle } from '$lib/components/page-header';
-  import PlatformIcon from '$lib/components/platform-icon.svelte';
-  import type { PageData } from './$types';
-  import LatestReleaseCard from './_components/latest-release-card.svelte';
-  import ReleaseItem from './_components/release-item.svelte';
-  import UserStateCard from './_components/user-state-card.svelte';
+  import type { Tool } from '$lib/types/tools';
 
-  export let data: PageData;
-  $: ({ session, db } = data);
-
-  if (!data.songs) throw new Error('No songs found');
-  const songs = data.songs!;
-  const socialLinks = data.socialLinks!;
+  const tools: Tool[] = [
+    {
+      name: 'Audio analyzer',
+      description: 'Receive information about an audio file, such as BPM or key.',
+      path: '/analyzer',
+    },
+    {
+      name: 'Soundcloud Downloader',
+      description: 'Get info about and download a Soundcloud track.',
+      path: '/soundcloud',
+    },
+  ];
 
   // Set page title
-  setPageHeaderTitle('Home');
+  setPageHeaderTitle('Tools');
 </script>
 
 <svelte:head>
-  <title>Elluzion</title>
+  <title>Tools | Elluzion</title>
 </svelte:head>
 
-<div class="flex flex-col gap-3 content-wrapper">
-  <!-- Header -->
-  <div class="flex items-end justify-between gap-2">
-    <span class="font-mono text-muted-text">Latest</span>
-    <div class="flex gap-4 p-3 border rounded-xl">
-      {#each socialLinks as platform}
-        <PlatformIcon
-          platform={platform.platform}
-          href={platform.href}
-          target="_blank"
-          fill="currentColor"
-        />
-      {/each}
-    </div>
-  </div>
-
-  <!-- Latest release -->
-  <LatestReleaseCard song={songs[0]} />
-
-  <!-- Other songs -->
-  {#each songs.slice(1) as song}
-    <ReleaseItem {song} />
+<div class="flex flex-col gap-4 content-wrapper">
+  {#each tools as tool}
+    <a href={tool.path}>
+      <Card class="flex flex-col">
+        <span class="text-lg font-medium">
+          {tool.name}
+        </span>
+        <p class="text-muted-text">{tool.description}</p>
+      </Card>
+    </a>
   {/each}
-
-  {#if session}
-    <UserStateCard {db} />
-  {/if}
 </div>
