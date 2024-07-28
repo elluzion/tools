@@ -54,7 +54,7 @@ export const SoundcloudController = (app: Elysia) =>
           }
 
           const file = await downloadFromSoundcloud(url);
-          return file || error(404, 'Error downloading song');
+          return file || error(500, 'Error downloading song');
         },
         {
           query: t.Object({
