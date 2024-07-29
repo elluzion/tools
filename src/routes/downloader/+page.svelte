@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { Api } from '$lib/api';
-  import type { SoundcloudSong } from '$lib/api/types/soundcloud';
+  import type { Api } from '$api';
+  import type { Song } from '$api/types/song';
   import { setPageHeaderTitle } from '$lib/components/page-header';
   import SpacerHandle from '$lib/components/spacer-handle.svelte';
   import Badge from '$lib/components/ui/badge/badge.svelte';
@@ -11,7 +11,7 @@
   import toast from 'svelte-french-toast';
 
   let inputUrl: string | undefined = undefined;
-  let trackData: SoundcloudSong | undefined = undefined;
+  let trackData: Song | undefined = undefined;
 
   async function request() {
     const client = treaty<Api>(location.origin);
@@ -44,6 +44,7 @@
     trackData = data;
     inputUrl = undefined;
 
+    // Success
     toast.success('Successful');
   }
 
@@ -51,11 +52,11 @@
     if (!trackData) return;
 
     const url = `${window.origin}/api/soundcloud/download?url=${encodeURIComponent(trackData.url)}`;
-    const filename = `${Formatter.joinList(trackData!!.artists, false)} - ${trackData!!.title}.mp3`;
 
     await fetch(url)
       .then((res) => (res.status === 200 ? res.blob() : Promise.reject('something went wrong')))
       .then((blob) => {
+        const filename = `${Formatter.joinList(trackData!!.artists, false)} - ${trackData!!.title}.mp3`;
         const objectUrl = window.URL.createObjectURL(blob);
 
         const a = document.createElement('a');
@@ -67,12 +68,12 @@
         document.body.appendChild(a);
         a.click();
         window.URL.revokeObjectURL(url);
-
         a.remove();
-      });
+      })
+      .catch((err) => toast.error(err));
   }
 
-  setPageHeaderTitle('Soundcloud Loader');
+  setPageHeaderTitle('Soundcloud Downloader');
 </script>
 
 <div class="content-wrapper">

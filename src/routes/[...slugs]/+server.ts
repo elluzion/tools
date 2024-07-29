@@ -1,4 +1,4 @@
-import api from '$lib/api';
+import api from '$api';
 
 type RequestHandler = (v: { request: Request }) => Response | Promise<Response>;
 

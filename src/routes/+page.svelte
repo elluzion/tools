@@ -12,7 +12,7 @@
     {
       name: 'Soundcloud Downloader',
       description: 'Get info about and download a Soundcloud track.',
-      path: '/soundcloud',
+      path: '/downloader',
     },
   ];
 
