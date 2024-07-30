@@ -110,7 +110,12 @@
 
 <div class="content-wrapper">
   <div class="flex flex-col gap-2">
-    <Input bind:value={inputUrl} name="url" placeholder="URL" />
+    <Input
+      bind:value={inputUrl}
+      on:keydown={(e) => e.key === 'Enter' && requestButtonClicked()}
+      name="url"
+      placeholder="URL"
+    />
     <Button on:click={() => requestButtonClicked()} class="w-full">Load</Button>
   </div>
 
