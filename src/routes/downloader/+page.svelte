@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { Song } from '$api/types/song';
+  import { page } from '$app/stores';
   import { setPageHeaderTitle } from '$lib/components/page-header';
   import SpacerHandle from '$lib/components/spacer-handle.svelte';
   import Badge from '$lib/components/ui/badge/badge.svelte';
@@ -7,10 +8,24 @@
   import { Input } from '$lib/components/ui/input';
   import { Api, ApiUrl } from '$lib/utilities/api';
   import Formatter from '$lib/utilities/formatter';
+  import { onMount } from 'svelte';
   import toast from 'svelte-french-toast';
 
   let inputUrl: string | undefined = undefined;
   let trackData: Song | undefined = undefined;
+
+  onMount(() => {
+    const urlParam = $page.url.searchParams.get('u');
+
+    if (urlParam) {
+      inputUrl = urlParam;
+      requestButtonClicked();
+
+      // Remove URL from URL bar
+      $page.url.searchParams.delete('u');
+      history.replaceState(null, '', $page.url);
+    }
+  });
 
   async function request() {
     if (!inputUrl) {
