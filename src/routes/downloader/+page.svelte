@@ -14,14 +14,12 @@
 
   async function request() {
     if (!inputUrl) {
-      toast.error('No URL provided');
-      return;
+      return Promise.reject('No URL provided');
     }
 
     // Check if URL is valid
     if (!inputUrl || !inputUrl.startsWith('https://') || !inputUrl.includes('soundcloud.com')) {
-      toast.error('Invalid Soundcloud URL');
-      return;
+      return Promise.reject('Invalid Soundcloud URL');
     }
 
     // Reset art data
@@ -33,20 +31,18 @@
     });
     // Error happened while requesting
     if (error) {
-      toast.error(error.value);
-      console.log(error);
-      return;
+      return Promise.reject(error.value);
     }
 
     trackData = data;
     inputUrl = undefined;
 
     // Success
-    toast.success('Successful');
+    return Promise.resolve('Success!');
   }
 
   async function download() {
-    if (!trackData) return;
+    if (!trackData) return Promise.reject('No track data');
 
     const url = `${ApiUrl}/soundcloud/download?url=${encodeURIComponent(trackData.url)}`;
 
@@ -66,8 +62,27 @@
         a.click();
         window.URL.revokeObjectURL(url);
         a.remove();
+        return Promise.resolve('Downloading!');
       })
-      .catch((err) => toast.error(err));
+      .catch((err) => {
+        return Promise.reject(err);
+      });
+  }
+
+  function requestButtonClicked() {
+    toast.promise(request(), {
+      loading: 'Loading...',
+      success: 'Success!',
+      error: (err) => err,
+    });
+  }
+
+  function downloadButtonClicked() {
+    toast.promise(download(), {
+      loading: 'Downloading...',
+      success: 'Download started!',
+      error: 'Error while downloading :/',
+    });
   }
 
   setPageHeaderTitle('Soundcloud Downloader');
@@ -76,7 +91,7 @@
 <div class="content-wrapper">
   <div class="flex flex-col gap-2">
     <Input bind:value={inputUrl} name="url" placeholder="URL" />
-    <Button on:click={() => request()} class="w-full">Load</Button>
+    <Button on:click={() => requestButtonClicked()} class="w-full">Load</Button>
   </div>
 
   {#if trackData}
@@ -100,7 +115,7 @@
       </div>
 
       <div>
-        <Button on:click={() => download()} class="w-full">Download</Button>
+        <Button on:click={() => downloadButtonClicked()} class="w-full">Download</Button>
       </div>
     </div>
   {/if}
