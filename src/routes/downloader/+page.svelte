@@ -1,21 +1,18 @@
 <script lang="ts">
-  import type { Api } from '$api';
   import type { Song } from '$api/types/song';
   import { setPageHeaderTitle } from '$lib/components/page-header';
   import SpacerHandle from '$lib/components/spacer-handle.svelte';
   import Badge from '$lib/components/ui/badge/badge.svelte';
   import Button from '$lib/components/ui/button/button.svelte';
   import { Input } from '$lib/components/ui/input';
+  import { Api } from '$lib/utilities/api';
   import Formatter from '$lib/utilities/formatter';
-  import { treaty } from '@elysiajs/eden';
   import toast from 'svelte-french-toast';
 
   let inputUrl: string | undefined = undefined;
   let trackData: Song | undefined = undefined;
 
   async function request() {
-    const client = treaty<Api>(location.origin);
-
     if (!inputUrl) {
       toast.error('No URL provided');
       return;
@@ -31,7 +28,7 @@
     trackData = undefined;
 
     // Request data from API
-    const { data, error } = await client.api.soundcloud.import.get({
+    const { data, error } = await Api.soundcloud.import.get({
       query: { url: inputUrl },
     });
     // Error happened while requesting
@@ -54,7 +51,7 @@
     const url = `${window.origin}/api/soundcloud/download?url=${encodeURIComponent(trackData.url)}`;
 
     await fetch(url)
-      .then((res) => (res.status === 200 ? res.blob() : Promise.reject('something went wrong')))
+      .then((res) => res.blob())
       .then((blob) => {
         const filename = `${Formatter.joinList(trackData!!.artists, false)} - ${trackData!!.title}.mp3`;
         const objectUrl = window.URL.createObjectURL(blob);
