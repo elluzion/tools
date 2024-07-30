@@ -5,7 +5,7 @@
   import Badge from '$lib/components/ui/badge/badge.svelte';
   import Button from '$lib/components/ui/button/button.svelte';
   import { Input } from '$lib/components/ui/input';
-  import { Api } from '$lib/utilities/api';
+  import { Api, ApiUrl } from '$lib/utilities/api';
   import Formatter from '$lib/utilities/formatter';
   import toast from 'svelte-french-toast';
 
@@ -48,7 +48,7 @@
   async function download() {
     if (!trackData) return;
 
-    const url = `${window.origin}/api/soundcloud/download?url=${encodeURIComponent(trackData.url)}`;
+    const url = `${ApiUrl}/soundcloud/download?url=${encodeURIComponent(trackData.url)}`;
 
     await fetch(url)
       .then((res) => res.blob())
