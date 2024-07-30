@@ -104,6 +104,10 @@
   setPageHeaderTitle('Soundcloud Downloader');
 </script>
 
+<svelte:head>
+  <title>Soundcloud Downloader | Elluzion</title>
+</svelte:head>
+
 <div class="content-wrapper">
   <div class="flex flex-col gap-2">
     <Input bind:value={inputUrl} name="url" placeholder="URL" />
