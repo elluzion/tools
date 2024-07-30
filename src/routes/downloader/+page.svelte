@@ -28,12 +28,15 @@
   });
 
   async function request() {
-    if (!inputUrl) {
+    const url = inputUrl;
+    inputUrl = undefined;
+
+    if (!url) {
       return Promise.reject('No URL provided');
     }
 
     // Check if URL is valid
-    if (!inputUrl || !inputUrl.startsWith('https://') || !inputUrl.includes('soundcloud.com')) {
+    if (!url || !url.startsWith('https://') || !url.includes('soundcloud.com')) {
       return Promise.reject('Invalid Soundcloud URL');
     }
 
@@ -42,7 +45,7 @@
 
     // Request data from API
     const { data, error } = await Api.soundcloud.import.get({
-      query: { url: inputUrl },
+      query: { url },
     });
     // Error happened while requesting
     if (error) {
@@ -50,8 +53,6 @@
     }
 
     trackData = data;
-    inputUrl = undefined;
-
     // Success
     return Promise.resolve('Success!');
   }
