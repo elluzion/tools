@@ -27,7 +27,7 @@
 <div class="flex flex-col gap-4 content-wrapper">
   {#each tools as tool}
     <a href={tool.path}>
-      <Card class="flex flex-col">
+      <Card class="flex flex-col transition-all hover:brightness-110 hover:ring">
         <span class="text-lg font-medium">
           {tool.name}
         </span>
